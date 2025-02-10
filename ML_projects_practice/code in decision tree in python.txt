@@ -1,0 +1,94 @@
+
+1
+Select the Gini index for the entire dataset
+
+
+0.375
+
+
+0.232
+
+
+0.653
+
+
+0.641
+
+Correct!
+Start project before checking your activities.
+
+2
+Suppose we want to split the dataset based on color. Compute the Gini index for each subset of the dataset that results from this split.
+
+
+Gini index red fruit = 0
+
+
+Gini index red fruit = 0.375
+
+
+Gini index blue fruit = 1
+
+
+Gini index blue fruit = 0.375
+
+Correct!
+Start project before checking your activities.
+
+3
+Which split, based on color or taste, results in a lower Gini index?
+
+
+Taste
+
+
+Color
+
+Correct!
+Start project before checking your activities.
+
+Marriage and Divorce Dataset
+We are going to work with data used for predicting divorces. The observations are people who are asked questions. The features are the responses to each of the 54 questions.
+
+The class represents whether the person is in a couple (0) or divorced (1).
+
+To see details of the dataset and the 54 questions, please refer to this link. The features Atr1 to Atr54 represent statements. For example, "I know my spouse very well."
+
+People respond with a value between 0 and 4, where 0 - indicates full agreement with the statement, and 4 - indicates no agreement at all. Values between 1 and 3 are intermediate.
+
+The class attribute indicates the marital status of the person. 0 - married, 1 - divorced.
+
+For this task,load the data data.csv in the notebook using the pandas library. Then generate the CART decision tree model with scikit-learn.
+
+We will skip the performance analysis. Therefore, we will not split into train and test.
+
+from sklearn import tree
+X = df.drop(['Class'], axis=1)
+y = df['Class']
+
+dt = tree.DecisionTreeClassifier(criterion='gini',max_depth=4,min_samples_leaf=2)
+dt.fit(X, y)
+
+plt.figure(figsize=(12,5))  # set plot size (denoted in inches)
+tree.plot_tree(dt,feature_names=df.columns[:-1],filled=True,rounded=True, fontsize=12)
+plt.show()
+
+Preview
+Based on this plot answer:
+
+4
+What is the Gini index of the initial split of the decision tree
+
+
+0.025
+
+
+0
+
+
+0.5
+
+
+0.023
+
+Correct!

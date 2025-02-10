@@ -1,0 +1,98 @@
+
+Quiz
+Read each question carefully and select the most appropriate answer from the options provided. Choose the option that best aligns with Scikit-Learn's capabilities and characteristics. There is only one correct answer for each question.
+
+1
+Scikit-Learn is primarily focused on
+
+
+Deep Learning
+
+
+Natural Language Processing
+
+
+Traditional Machine Learning
+
+
+Time Series
+
+Correct!
+Start project before checking your activities.
+
+2
+In Scikit-Learn, what is the role of a model class?
+
+
+It stores the trained model's predictions.
+
+
+It represents the dataset used for training.
+
+
+It contains the output labels for supervised learning tasks.
+
+
+It represents a machine learning algorithm and its associated methods.
+
+Correct!
+Start project before checking your activities.
+
+3
+Scikit-Learn is built on top of which Python libraries?
+
+
+NumPy, SciPy, and Matplotlib
+
+
+Pandas and Seaborn
+
+
+Statsmodels and OpenCV
+
+
+Tensorflow
+
+Correct!
+Start project before checking your activities.
+
+4
+What does the following line of code achieve in Scikit-Learn?
+
+from sklearn.ensemble import RandomForestClassifier
+
+classification_model = RandomForestClassifier()
+
+It generates synthetic data for binary classification.
+
+
+It plots the decision boundary of the logistic regression model.
+
+
+It creates an instance of a random forest classifier for classification tasks.
+
+
+It evaluates the performance of the logistic regression model.
+
+Correct!
+Start project before checking your activities.
+
+5
+What is the purpose of the following code in Scikit-Learn?
+
+from sklearn.neighbors import KNeighborsClassifier
+
+classification_model = KNeighborsClassifier()
+
+It creates an instance of a k-nearest neighbors classifier for classification tasks.
+
+
+It generates synthetic data for a k-nearest neighbors classification problem.
+
+
+It evaluates the performance of the k-nearest neighbors classifier.
+
+
+It creates an instance of a k-nearest neighbors classifier for regression tasks.
+
+Correct!

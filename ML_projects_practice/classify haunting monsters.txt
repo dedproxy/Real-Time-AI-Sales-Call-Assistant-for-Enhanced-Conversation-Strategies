@@ -1,0 +1,118 @@
+
+Classification model
+Let's import the dataset train_ghosts.csv and explore it. Store the dataset in df. Check the structure of the data by inspecting the number of rows, columns, and attributes of the dataset. You can use functions like .shape, .head(), .info(), and .describe() to get a quick overview of the data.
+
+1
+Which column is the target variable?
+
+Which column is the predictor/target variable in this dataset? The value that we'll try to predict:
+
+
+type
+
+
+hair_length
+
+
+rotting_flesh
+
+
+has_soul
+
+
+bone_length
+
+Correct!
+Start project before checking your activities.
+
+2
+What type of classification is required for this project?
+
+Is it binary or multiclass classification?
+
+
+Multiclass
+
+
+Binary
+
+Correct!
+Start project before checking your activities.
+
+We are working with a balance dataset. A balanced dataset is important in machine learning because it ensures that the model is not biased toward any particular class.
+
+A balanced dataset is a dataset in which the number of samples in each class is approximately equal.
+
+
+Preview
+Let's separate the target and the features into two variables.
+
+3
+Separate the target and the features into two variables
+
+Store the features in X and the target y.
+
+X should be a DataFrame, y should be a Series.
+
+Correct!
+Start project before checking your activities.
+
+Let's split the dataset into train and test sets. The argument test_size is a float value whose value ranges between 0.0 and 1.0, which represents the proportion of our test size. its default value is none. The train_size argument is similar to test_size, but it represents the proportion of our train size.
+
+4
+Split the data into training and testing using a 80%/20% proportion
+
+Use the train_test_split function to split the data into training and testing. Use a proportion of 80% for the training set, and 20% for the testing set, and random_state=0.
+
+Store the values in the variables in X_train,X_test,y_train and y_test.
+
+Correct!
+Start project before checking your activities.
+
+Let's use a decision tree algorithm to predict what kind of monster it is.
+
+A decision tree model is a type of machine learning algorithm that uses a tree-based model to make predictions. It is commonly used for classification and regression problems. The algorithm works by recursively partitioning the data into subsets based on the values of the input features, and creating a tree structure to represent the decisions made at each step. The final predictions are made based on the values of the features on the leaves of the tree. Decision trees are simple to interpret and implement, but can also be prone to overfitting if the tree is allowed to grow too deep. You will learn and practice in detail about machine learning models in future tracks.
+
+We imported the class in the first cell using:
+
+from sklearn.tree import DecisionTreeClassifier
+5
+Create an instance of the DecisionTreeClassifier
+
+Instantiate the model and store it in the variable dt. Use random_state=0 in the argument of the model.
+
+Correct!
+Start project before checking your activities.
+
+6
+Train a Decision tree classifier
+
+It's time to train the decision tree using the training dataset.
+
+Correct!
+Start project before checking your activities.
+
+7
+Make predictions on the test set
+
+Use the trained model to make predictions on the test data. Store the prediction in y_pred.
+
+Correct!
+Start project before checking your activities.
+
+Let's use a basic form of how you can calculate accuracy using pandas for a classification task.
+
+The accuracy variable will hold the accuracy value, which is the proportion of correctly predicted labels out of the total labels.
+
+# Assuming you have columns 'true_labels' for true labels and 'predicted_labels' for predicted labels
+true_labels = y_test
+predicted_labels = y_pred
+
+# Calculate accuracy
+accuracy = (true_labels == predicted_labels).mean()
+print("Accuracy:", accuracy)
+An accuracy score of 0 means that the model's predictions are completely incorrect, while an accuracy score of 1 signifies that all predictions made by the model are correct.
+
+For instance, an accuracy of 0.75 implies that the model has made accurate predictions for 75% of the instances in the dataset. This indicates that the model's predictions align with the true labels in the dataset for a significant portion of cases.
+
+Congratulations!! By completing these fundamental steps, you have laid a solid foundation for further exploration and improvement of your classification model. As you progress, you can experiment with different algorithms, adjust hyperparameters, perform feature engineering, and employ advanced evaluation techniques to enhance the performance and robustness of your classification models. Keep up the great work!

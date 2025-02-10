@@ -1,0 +1,70 @@
+
+Based on the previous instructions, respond to the following questions
+
+1
+True or False: In cross-validation, the data is split into training and testing sets, and the precision score is computed on the testing set for each fold.
+
+
+False
+
+
+True
+
+Correct!
+Start project before checking your activities.
+
+2
+True or False: Increasing the number of folds in cross-validation can improve the accuracy of the estimated precision score, but at the cost of increased computational time.
+
+
+True
+
+
+False
+
+Correct!
+Start project before checking your activities.
+
+3
+Compute the average precision score of the cross-validation result
+
+
+The average cross-validation precision is higher than 0.90
+
+
+The average cross-validation precision is higher than 0.80<
+
+
+The average cross-validation precision is lower than 0.70<
+
+Correct!
+Start project before checking your activities.
+
+4
+True or False: The results show that the Random Forest model trained with n_estimators=100 and random_state=42 did not generalize well, as it showed poor performance on the test dataset.
+
+
+False
+
+
+True
+
+Correct!
+Start project before checking your activities.
+
+5
+True or False: Cross-validation can only be used to estimate the precision score of classification models, but not regression models.
+
+
+False
+
+
+True
+
+Correct!
+Start project before checking your activities.
+
+As you may have noticed from the previous task, we first performed cross-validation to estimate the generalization performance of our model. Afterwards, we trained the model using the complete dataset. This approach is commonly used since cross_val_score() is primarily used to evaluate the generalization performance of the model
+
+Conclusion
+During this lab, we learned about cross-validation, which is a technique used to evaluate the performance of a machine learning model on an independent dataset. Cross-validation involves partitioning the data into multiple subsets, or folds, and using each fold as a testing set while training the model on the remaining folds. This helps to provide a more accurate estimate of the model's performance by reducing the risk of overfitting to the training data. In particular, we focused on k-fold cross-validation, which involves dividing the data into k subsets of roughly equal size.

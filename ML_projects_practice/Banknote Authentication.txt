@@ -1,0 +1,64 @@
+This art was generated with Free AI Art Generator
+
+The objective of this lab is to classify banknotes as either authentic or forged based on various measures obtained from a photograph using SVM.
+
+The data was obtained by capturing images of genuine and forged banknote-like specimens. An industrial camera typically used for print inspection was used to digitize the images. The resulting images have a resolution of 400 x 400 pixels, with gray-scale pictures of approximately 660 dpi, due to the object lens and distance from the object being investigated. Wavelet Transform tools were employed to extract features from the images.
+
+The follow table lists the features of a dataset that includes the variance, skewness, curtosis, entropy, and class of a wavelet transformed image. The variance, skewness, and curtosis are continuous numerical features, while the entropy is a measure of randomness and is also a continuous numerical feature. The class is an integer value that represents the classification of the image. This table provides a high-level overview of the dataset and the features that are included.
+
+Feature	Description
+Variance	Variance of Wavelet Transformed image (continuous)
+Skewness	Skewness of Wavelet Transformed image (continuous)
+Curtosis	Curtosis of Wavelet Transformed image (continuous)
+Entropy	Entropy of image (continuous)
+Class	Class (integer)
+Linear SVM Model
+The Banknote Authentication dataset is available in the UCI Machine Learning Repository. In this activity, we will use the Banknote Authentication dataset to train a Support Vector Machine (SVM) model to predict whether a given banknote is authentic or forged based on various measures taken from a photograph.
+
+To complete this assignment, please follow these instructions:
+
+You will need to import pandas and numpy for data manipulation, matplotlib and seaborn for data visualization, train_test_split from sklearn model_selection for splitting the data into training and testing sets. You can import all the libraries that you think will be required or can import it as you go along.
+
+Load the data bill_authentication.csv in the notebook using the pandas library.
+
+Exploratory Data Analysis (EDA) is an approach to analyzing and understanding data through visualizations and statistical methods. The main objective of EDA is to uncover patterns, relationships, and insights in the data that can inform future analysis and decision-making.
+
+Check for missing values and perform any necessary data cleaning. Split the dataset into training and testing sets using random_staate as 0 and test size as 0.2 as:
+
+X_train, X_test, y_train, y_test = train_test_split(x, y,random_state=0,test_size=0.2)
+In this task, you will use scikit-learn's GridSearchCV and make_pipeline to find the best value for the C parameter of an SVM linear classifier (C= [0.1, 1, 10, 100,1000]).
+Define a pipeline with StandardScaler and SVM classifier.
+
+Store the model in the variable grid.
+
+Define the parameter grid to search over as:
+
+param_grid = {'C': [0.1, 1, 10, 100,1000]}
+Evaluate the performance of the SVM model on the testing set using accuracy, precision, recall, and F1-score. Use a confusion matrix to visualize the model's performance.
+Based on your results answer the following questions:
+
+Note: To obtain the correct answer, you should follow each of the previous instructions.
+
+1
+The Banknote Authentication dataset consists of images of genuine and forged banknotes. True or False ?
+
+
+True
+
+
+False
+
+Correct!
+Start project before checking your activities.
+
+2
+SVMs are not affected by the scale of the input features. True or False ?
+
+
+True
+
+
+False
+
+Correct!
+Start project before checking your activities.

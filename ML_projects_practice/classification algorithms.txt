@@ -1,0 +1,405 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+
+X, y = make_blobs(n_samples=1000, centers=2,
+                  random_state=0, cluster_std=1.3)
+
+Now, we will make a figure to show the different instances that we generate as points in the (x1,x2) plane and assign them a different color depending on their y label:
+
+Let's run the code in this notebook.
+
+plt.scatter(X[:, 0], X[:, 1], c=y, s=25, cmap='bwr')
+plt.colorbar()
+plt.xlabel('x1')
+plt.ylabel('x2')
+plt.show()
+
+Preview
+Simple classification algorithm
+Based on previous figure, we can define a simple classification:
+
+If X2 is higher than 2 the new point corresponded to the blue group.
+
+If X2 is lower than 2 the point corresponded to the red group.
+
+X_2>2
+
+Yes
+
+No
+
+Blue
+
+Red
+
+Now, let's improve our first classification model:
+
+
+Preview
+We just developed a simple decision tree algorithm:
+
+Decision Trees are a type of Supervised Machine Learning where the data is continuously split according to a certain parameter. The tree can be explained by two entities, namely decision nodes, and leaves. The leaves are the decisions or the outcomes, and the decision nodes are where the data is split. Each split is based on a specific feature and threshold, and it determines the class or outcome associated with specific range of feature values.
+
+Let's visualize the decision rules in the scatterplot. A decision rule is a set of conditions or criteria that a classifier uses to assign class labels to instances in a dataset. The decision rule defines how the model makes predictions based on the features of the data.
+
+
+Preview
+Decision tree with Scikit-Learn
+How to train a model in machine learning.
+The process of training an Machine Learning (ML) model involves providing an ML algorithm with training data to learn from. The term ML model refers to the model artifact that is created by the training process.
+
+The training data must contain the correct answer, which is known as a target. The learning algorithm finds patterns in the training data that map the input data attributes to the target (the answer that you want to predict), and it outputs an ML model that captures these patterns.
+
+Train a decision tree with Scikit-Learn
+Now, we are going to train a decision tree to classify our instances using Scikit-Learn.
+
+We must first create an object corresponding to the model. This object will be of the DecisionTreeClassifier class, which we imported from the Scikit-Learn library.
+
+Let's run the code in the notebook.
+
+from sklearn.tree import DecisionTreeClassifier
+
+# decision tree
+tree = DecisionTreeClassifier(max_depth=3, random_state = 42)
+The class has several parameters that can be used to control the behavior of the classifier, including the max_depth parameter, which sets the maximum depth of the tree, and the "criterion" parameter, which is used to specify the function used to evaluate the quality of a split.
+
+One of the most important parameter is max_features which can be used to limit the number of features considered at each node. This can be used to control overfitting, by preventing the tree from considering too many features in the split.
+
+Another parameter is the random_state. This parameter is a seed value used to initialize the random number generator for various stochastic processes, such as the selection of random subsets of the data for training or the selection of random feature subsets at each split point in the decision tree.
+
+We strongly recommend familiarizing yourself with its documentation. It doesn't matter if you don't understand everything by now.
+
+So far, all we've done is create the object. Now, we need to train it on our data. We will achieve this with the fit(...) method that all the classes corresponding to Scikit-Learn models have.
+
+Let's run the code in the notebook.
+
+tree.fit(X, y)
+The model is already trained.
+
+This means that we have a tool that, given certain characteristics of an instance - pairs (x1 and x2) - returns us which label the model believes it corresponds to. We can do this using the predict(...) method, which all classes corresponding to Scikit-Learn models also have.
+
+Let's run the following examples in the notebook:
+
+inst = np.array([4,0]) 
+inst = inst.reshape(1,-1) 
+y_pred = tree.predict(inst) # prediction
+print(y_pred) # print the prediction
+Do you agree with the assigned label? Look at the training set graphic if you agree with the label returned to us.
+
+Finally, let's check the results of the training set in the notebook.
+
+np.random.seed(3) # seed
+n = 3
+idxs = np.random.randint(X.shape[0], size=3)
+inst_t = X[idxs,:]
+y_pred = tree.predict(inst_t)
+1
+Predictions
+
+Based on previous results, choice the correct answers.
+
+
+The predictive label of the instance 874 is 0
+
+
+The predictive label of the instance 249 is 1
+
+
+The predictive label of the instance 874 is 1
+
+
+The predictive label of the instance 664 is 0
+
+Correct!
+The correct answer are:
+
+The predictive label of the instance 874 is 0
+The predictive label of the instance 249 is 1
+for i, idx in enumerate(idxs):
+    print(f'Instance {idx}. Real label: {y[idx]}. Predictive label: {y_pred[i]}')
+Instance 874. Real label: 1. Predictive label: 0 Instance 664. Real label: 1. Predictive label: 1 Instance 249. Real label: 1. Predictive label: 1
+
+Decision boundaries
+Introduction to decision boundaries
+Let's go back to one aspect of the classifier: given the characteristics 
+ and 
+ of an instance, it determines the corresponding label 
+ (0: blue, 1: red). We can imagine that the classifier paints the 
+, 
+ plane with the color it best considers. If there are areas that are blue and areas that are red, there must be a boundary where the color changes.
+
+Let's attempt to visualize it.
+
+The function we define in the next cell allows us to explore what the decision domain of our tree looks like once we train it.
+
+Let's now run the following function in the notebook.
+
+def visualize_classifier(model, X, y, ax=None, cmap='bwr'):
+    ax = ax or plt.gca()
+
+    # Plot the training points
+    ax.scatter(X[:, 0], X[:, 1], c=y, s=30, cmap=cmap,
+               clim=(y.min(), y.max()), zorder=3, alpha = 0.5)
+    ax.axis('tight')
+    ax.set_xlabel('x1')
+    ax.set_ylabel('x2')
+#     ax.axis('off')
+    xlim = ax.get_xlim()
+    ylim = ax.get_ylim()
+
+    xx, yy = np.meshgrid(np.linspace(*xlim, num=200),
+                         np.linspace(*ylim, num=200))
+    Z = model.predict(np.c_[xx.ravel(), yy.ravel()]).reshape(xx.shape)
+
+    # Create a color plot with the results
+    n_classes = len(np.unique(y))
+    contours = ax.contourf(xx, yy, Z, alpha=0.3,
+                           levels=np.arange(n_classes + 1) - 0.5,
+                           cmap=cmap, clim=(y.min(), y.max()),
+                           zorder=1)
+
+    ax.set(xlim=xlim, ylim=ylim)
+Use previous function with the dataset to obtain the decision boundary shows below.
+
+
+Preview
+The line that split both areas is the decision boundary.
+
+The decision boundary is the region of a problem space in which the output label of a classifier is ambiguous.
+
+If the decision surface is a hyperplane, then the classification problem is linear, and the classes are linearly separable. Decision boundaries are not always clear-cut.
+
+Accuracy score
+In the previous figure, the points (instances) that are on a background of the same color are correctly classified by the model. This means that if we use the model to predict its label 
+ based on its coordinates 
+ and 
+, it would give us the original label of the point. Conversely, points that are on a background of a different color are misclassified.
+
+We could then ask ourselves:
+
+What is the percentage of instances well classified by the model?
+
+To answer this, we will use the predict method on the entire dataset 
+. Then, using the accuracy_score function, we can calculate the percentage of correct predictions by comparing our y_pred prediction to the original 
+ class. It's advisable to review the documentation of this function, but for now, we will simply state that it is one of the many metrics used to evaluate our models.
+
+2
+Accuracy score
+
+Use the following code to compute the accuracy_score:
+
+from sklearn.metrics import accuracy_score
+
+y_pred = tree.predict(X)
+accuracy_score(y_pred,y)
+Write first two digit after decimal
+
+0.90
+Correct!
+Confusion Matrix
+The confusion matrix is a table with 4 different combinations of predicted and actual values.
+
+True Positive:
+
+You predicted a positive class and it’s true.
+You predicted a red point and it is.
+True Negative:
+
+You predicted a negative class and it’s true.
+You predicted that a point is not red and it is not.
+False Positive:
+
+You predicted a positive class and it’s false.
+You predicted a red point but it is blue.
+False Negative:
+
+You predicted a negative class and it’s false.
+You predicted a blue point but it is actually red.
+
+Preview
+Let's compute the confusion matrix using the following code in the notebook:
+
+from sklearn.metrics import confusion_matrix
+print(confusion_matrix(y,y_pred))
+or using:
+
+from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+
+cm = confusion_matrix(y, y_pred)
+ConfusionMatrixDisplay(confusion_matrix=cm).plot(cmap = plt.get_cmap('Blues'))                           
+
+Preview
+3
+Confusion Matrix
+
+Select the correct answers using the information from the confusion matrix.
+
+
+The model classify correctly 905 instances
+
+
+There are only 61 true positive and 34 true negative
+
+
+The number of false positive instance is 61
+
+
+The model classify incorrectly 500 instance
+
+Correct!
+The correct answers are:
+
+The model classifies correctly 905 instances
+The number of false positive instances is 61
+Check your knowledge: Visualizing a Decision Tree
+2016 US Election
+We are attempting to predict the outcome of the 2016 Presidential election (Trump vs. Clinton) in each county in the US. To do this, we will use two predictor variables:
+
+Minority: the percentage of residents that are minorities.
+Bachelor: the percentage of resident adults with a bachelor's degree (or higher).
+The dataset is available in kaggle
+
+For this task read the data file county_election.csv into a Pandas data frame.
+
+4
+Create the response variable based on the columns Trump and Clinton
+
+Separate the target and the features into two variables and create the response variable based on the columns Trump and Clinton.
+
+Select the correct code to complete this task
+
+There could be more than just one correct answer.
+
+
+y=np.where(df.trump>df.clinton,1,0)
+
+
+X=df[['minority','bachelor']]
+
+
+X=df.drop(['trump', 'clinton'],axis=1)
+
+
+y=df.trump
+
+Correct!
+We only consider two variables 'minority' and 'bachelor'.
+
+The correct answers are:
+
+X=df[['minority','bachelor']]
+y=np.where(df.trump>df.clinton,1,0)
+5
+Decision Tree classifier
+
+Initialize a Decision Tree classifier (name the model clf) and fit on the data with a random_state: 42 and max_depth : 3 (the maximum depth of our decision tree using the max_depth parameter).
+
+Calculate the accuracy score of the training dataset. Select the correct answer.
+
+
+0.901
+
+
+0.908
+
+
+0.808
+
+
+0.801
+
+Correct!
+In order to visualize the decision Tree run the following code:
+
+from sklearn import tree
+# Plot the Decision Tree trained above with parameters filled as True
+plt.figure(figsize = (10,8))
+tree.plot_tree(clf, filled = True)
+plt.show()
+
+Preview
+In the decision tree chart, each internal node has a decision rule that splits the data. Gini referred to as the Gini ratio, which measures the impurity of the node. You can say a node is pure when all of its records belong to the same class, such nodes known as the leaf node.
+
+Quiz
+Based on previous activities and discussions, answer the following questions.
+
+6
+Classification
+
+Which of the following statements are True about classification?
+
+
+Classification is a unsupervised task.
+
+
+Classification is a supervised task.
+
+
+The target variable is the variable whose values are modeled and predicted by other variables.
+
+
+A single row of data is called an instance.
+
+Correct!
+The correct answers are:
+
+Classification is a supervised task.
+The target variable is the variable whose values are modeled and predicted by other variables.
+A single row of data is called an instance.
+7
+Example of classification
+
+Which of the following statements are examples of classification?
+
+
+Predict when an images belong to a class such as recurrent cancer or no cancer.
+
+
+Determine when a heater is on or off based on temperature data.
+
+
+Predict the prices of the house based on other variables
+
+
+Develop a mathematical relationship between heater level (0-100%) and temperature (20-70°C).
+
+Correct!
+The correct answers are:
+
+Determine when a heater is on or off based on temperature data.
+
+Predict when an images belong to a class such as recurrent cancer or no cancer.
+
+8
+Training and testing phase
+
+In which phase are model parameters adjusted?
+
+
+Training phase
+
+
+Testing phase
+
+
+Data preparation phase
+
+Correct!
+Conclusion
+This lab introduces one of the most simplest classification techniques and algorithms to predict the value of the class label based on the features in the dataset. We learned how to implement a Decision tree algorithm using scikit-learn. You have seen that this model is intuitive and easy to explain to technical teams. If you want to learn more about Decision Trees, take the lab on how to code one from scratch. The theory behind how it works will be covered, and then the implementation in Python will be demonstrated.
+
+Continue with
+Home Loan Approval
+Home Loan Approval
+medium
+Classifying Legendary Pokemons using Naive Bayes and Decision Trees
+Classifying Legendary Pokemons using Naive Bayes and Decision Trees
+medium
+How Naive Bayes Classifier works?
+How Naive Bayes Classifier works?
+Learn
+easy
+Back to Track page or Explore all projects on the Catalog

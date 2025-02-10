@@ -1,0 +1,194 @@
+Random forest is a machine learning algorithm that is commonly used for classification and regression tasks. It is an ensemble learning method that constructs multiple decision trees at training time and outputs the mode or mean prediction of the individual trees as the final prediction.
+
+In previous lab, you learn about bagging models. Random Forest and bagging are both ensemble learning techniques that involve building multiple models and combining their outputs to improve predictive accuracy. Bagging is a general technique that reduces the variance of a single machine learning model by training multiple models on random subsets of the training data, while Random Forest is a specific type of bagging that is designed for decision trees and reduces overfitting and improves model diversity by using feature and data subsets. Overall, Random Forest is often more accurate than bagging for decision tree models due to its additional techniques and improved performance.
+
+In this lab, we will learn and practice how to implement a random forest classification using sckit-learn.
+
+
+Preview
+Random Forest
+The basic idea behind random forest is to create a large number of decision trees, each one based on a random subset of the features and training data. This randomness helps to reduce overfitting, which is a common problem in decision tree models.
+
+
+Preview
+Photo by tibco
+
+During prediction time, the algorithm takes the input data and passes it through each decision tree, which produces a prediction. The final prediction is then made by aggregating the output of all the decision trees. In classification problems, this aggregation is done by taking the mode (most frequently occurring class) of all the predictions, while in regression problems, it is done by taking the mean of all the predictions.
+
+Let's see an example of how to use the Random Forest algorithm in Python using the scikit-learn library:
+
+# Import the necessary libraries
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+
+# Generate a random dataset for classification
+X, y = make_classification(n_samples=1000, n_features=10, random_state=0)
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a Random Forest classifier
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# Train the classifier on the training data
+rf.fit(X_train, y_train)
+
+Based on this example, answer the following activity:
+
+1
+Prefermance evaluation
+
+Compute the accuracy score, confusion matrix, precision and recall using the testing dataset.
+
+Then select the correct answers
+
+
+The accuracy score is higher than 0.70
+
+
+The accuracy score is 0.75
+
+
+The precision is 0.89
+
+
+The precision is 0.948 and the recall is 0.958
+
+Correct!
+2
+Compute precision and recall of the following example
+
+For this task, use the following dataset:
+
+# Generate a random dataset for classification
+X, y = make_classification(n_samples=1000, n_features=10, random_state=42)
+
+# Split the dataset into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Your task is to train a Random Forest classifier using different max_depth values and select the correct answers. Here are the instructions:
+
+1. Create a list of max_depth values: max_depths = [2, 4, 6, 8, 10,100].
+2. Loop through the list of max_depth values and train a RandomForestClassifier for each value. Use also , random_state=42 and  n_estimators=100.
+3. Use the trained classifier to make predictions on the test set.
+4. Compute the accuracy score for each classifier using the accuracy_score function from scikit-learn.
+5. Select the correct answer(s) based on the accuracy score(s), precision and recall.
+Good luck!
+
+
+Max depth: 6 = Accuracy: 0.79, Precision: 0.81 and Recall: 0.85
+
+
+Max depth: 10 = Accuracy: 0.89,Precision: 0.92 and Recall: 0.86
+
+
+Max depth: 10 = Accuracy: 0.85,Precision: 0.91 and Recall: 0.79
+
+
+Max depth: 4 = Accuracy: 0.85,Precision: 0.89 and Recall: 0.84
+
+Wrong answer, try again!
+Quiz
+3
+Select the correct sentences about Random Forest
+
+
+The Random Forest algorithm constructs multiple decision trees and combines their outputs to make a final prediction
+
+
+Random Forest is a type of clustering algorithm.
+
+
+The number of trees in a Random Forest model should always be large to achieve better performance.
+
+
+The hyperparameters of a Random Forest model include the number of trees, the maximum depth of each tree, and the minimum number of samples required to split a node.
+
+
+The Random Forest algorithm is prone to overfitting when the maximum depth of the trees is too small.
+
+
+The output of a Random Forest model is a probability score for each class.
+
+
+In a Random Forest model, each decision tree is trained on a random subset of the features.
+
+
+Random Forest is a type of supervised learning algorithm.
+
+Correct!
+4
+True or False: Random Forest models generate non-linear decision boundaries.
+
+
+True
+
+
+False
+
+Correct!
+5
+True or False: Random Forest models are highly interpretable due to the simplicity of the decision trees that they are composed of.
+
+
+False
+
+
+True
+
+Correct!
+Feature Importance
+Feature importance is a measure of how much each feature contributes to the accuracy of the model. Random Forest provides an easy way to calculate feature importance by computing the average decrease in the impurity measure (typically Gini impurity or information gain) of the tree nodes that use the feature. The importance score for each feature is then normalized so that the sum of all scores is equal to 1.
+
+Let's see an example. We first generate a random dataset with 10 features, 5 of which are informative. We then create a Random Forest classifier with 100 trees and train it on the dataset. Finally, we print the feature importance scores, which indicate how much each feature contributed to the accuracy of the model.
+
+Let's run the following code in the notebook
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+
+# Generate a random dataset
+X, y = make_classification(n_samples=1000, n_features=10, n_informative=5, n_redundant=0, random_state=42)
+
+# Create a Random Forest classifier
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+
+# Train the model
+rf.fit(X, y)
+
+# Print the feature importance scores
+importances = rf.feature_importances_
+for feature, importance in zip(range(X.shape[1]), importances):
+    print('Feature %d: %f' % (feature, importance))
+6
+Based on the previous example, which feature contributed more?
+
+
+Feature 5
+
+
+Feature 7
+
+
+Feature 1
+
+
+Feature 4
+
+Correct!
+7
+The feature importance score for a feature in a machine learning model indicates how much the feature contributes to the target variable.
+
+
+True
+
+
+False
+
+Correct!
+Conclusion
+During this lab, we learned the fundamentals of random forest and how to implement it using scikit-learn. We also discussed the advantages of using this model over decision trees. Random Forest is an ensemble learning technique that builds multiple decision trees and combines their predictions to generate a final output.

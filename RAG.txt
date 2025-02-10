@@ -1,0 +1,117 @@
+## What is Retrieval-Augmented Generation (RAG)?
+Retrieval-Augmented Generation, or RAG, represents a cutting-edge approach to artificial intelligence (AI) and natural language processing (NLP). At its core, RAG LLM is an innovative framework that combines the strengths of retrieval-based and generative models, revolutionizing how AI systems understand and generate human-like text.
+
+## Why Use RAG?
+The development of RAG is a direct response to the limitations of large language models (LLMs) like GPT. While LLMs have shown impressive text generation capabilities, they often struggle to provide contextually relevant responses, hindering their utility in practical applications. RAG LLM aims to bridge this gap by offering a solution that understands user intent and delivers meaningful and context-aware replies.
+##Utilizing LangChain for Enhanced Retrieval-Augmented Generation (RAG)
+
+!pip install langchain openai
+!pip install -q -U faiss-cpu tiktoken
+import os
+
+from dotenv import load_dotenv
+load_dotenv('/.env')
+## Web Data Loading for the RAG Knowledge Base
+from langchain_community.document_loaders import WebBaseLoader
+
+yolo_nas_loader = WebBaseLoader("https://deci.ai/blog/yolo-nas-object-detection-foundation-model/").load()
+
+decicoder_loader = WebBaseLoader("https://deci.ai/blog/decicoder-efficient-and-accurate-code-generation-llm/#:~:text=DeciCoder's%20unmatched%20throughput%20and%20low,re%20obsessed%20with%20AI%20efficiency.").load()
+
+yolo_newsletter_loader = WebBaseLoader("https://deeplearningdaily.substack.com/p/unleashing-the-power-of-yolo-nas").load()
+
+## splitting data into chunks
+
+text_splitter = CharacterTextSplitter(
+	separator="\n\n",
+	chunk_size=500,
+	chunk_overlap=0,
+	is_separator_regex=False,)
+Let us apply the text_splitter for the data as below to split the data into chunks.
+
+yolo_nas_chunks = text_splitter.split_documents(yolo_nas_loader) 
+decicoder_chunks = text_splitter.split_documents(decicoder_loader)
+yolo_newsletter_chunks = text_splitter.split_documents(yolo_newsletter_loader)
+
+## embedding and vector setup
+
+from langchain_openai import OpenAIEmbeddings
+from langchain.embeddings.cache import CacheBackedEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain.storage import LocalFileStore
+
+store = LocalFileStore("./cachce/")
+
+# create an embedder
+core_embeddings_model = OpenAIEmbeddings()
+
+embedder = CacheBackedEmbeddings.from_bytes_store(
+    core_embeddings_model,
+    store,
+    namespace = core_embeddings_model.model
+)
+
+# store embeddings in vector store
+vectorstore = FAISS.from_documents(yolo_nas_chunks, embedder)
+
+vectorstore.add_documents(decicoder_chunks)
+
+vectorstore.add_documents(yolo_newsletter_chunks)
+
+# instantiate a retriever
+retriever = vectorstore.as_retriever()
+
+## Establishing retrieval system
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough, RunnableParallel
+
+# this formats the docs returned by the retriever 
+def format_docs(docs):
+	return "\n\n".join(doc.page_content for doc in docs)
+
+# prompt to send to the LLM
+prompt = """You are an assistant for question-answering tasks.
+    	Use the following pieces of retrieved context to answer the question.
+    	If you don't know the answer, just say that you don't know.
+    	Use three sentences maximum and keep the answer concise.
+
+    	Question: {question}
+
+    	Context: {context}
+
+    	Answer:
+    	"""
+
+prompt_template = ChatPromptTemplate.from_template(prompt)
+
+llm = ChatOpenAI(model='gpt-4o-mini', streaming=True)
+
+
+# This code defines a chain where input documents are first formatted, then passed through a prompt template, and finally processed by an LLM.
+rag_chain_from_docs = (
+	RunnablePassthrough.assign(context=(lambda x: format_docs(x["context"])))
+	| prompt_template
+	| llm
+	)
+# This code creates a parallel process: one retrieves the context (using a retriever), and the other passes the question through unchanged. The results are then combined and assigned to the variable `answer` using the `rag_chain_from_docs` processing chain.
+rag_chain_with_source = RunnableParallel(
+	{"context": retriever, "question": RunnablePassthrough()}
+).assign(answer=rag_chain_from_docs)
+## Key Takeaways
+Retrieval Augmented Generation (RAG) is a groundbreaking framework that enhances Large Language Models (LLMs) by integrating external knowledge sources.
+RAG overcomes the limitations What is RAG and LLM?
+A. RAG (retrieval-augmented generation) and LLM (large language model) represent advancements in AI. RAG combines retrieval and generation, while LLM refers to models like GPT that process and generate text.of LLMs’ parametric memory, enabling them to access real-time data, improving contextualization, and providing up-to-date responses.
+With RAG, AI-generated content becomes more accurate, context-aware, and transparent, as it can cite sources and reduce data leakage.
+RAG’s updatable memory eliminates frequent model retraining, making it a cost-effective solution for various applications.
+This technology promises to revolutionize AI across industries, providing users with more reliable and relevant information.
+
+## FAQ's
+What is a retrieval-augmented generation (RAG)?
+A. Retrieval-augmented generation (RAG) combines generation and retrieval models in AI. It enhances text generation by retrieving relevant information from a large dataset before generating responses.
+What is the RAG approach to Gen AI?
+A. The RAG approach in Gen AI integrates retrieval-based methods with generative models. It leverages pre-existing knowledge for more accurate and contextually relevant text generation tasks.
+What is the RAG system in AI?
+A. The RAG system in AI uses a dual-model architecture. A retrieval model fetches relevant information, guiding a generative model to produce coherent, informed responses or outputs.
+
+                     

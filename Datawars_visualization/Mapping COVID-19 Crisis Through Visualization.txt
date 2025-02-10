@@ -1,0 +1,376 @@
+Using the right plots
+By now, it is no secret that data visualization is a crucial skill in understanding complex datasets, allowing you to identify patterns and gain insights that might be hidden in raw data. What's more? In today’s world, especially with events like the COVID-19 pandemic, the ability to communicate these insights clearly can influence decisions that impact millions of lives.
+
+In this project, we will use COVID-19 data to sharpen your visualization skills. By focusing on plotting styles and customization, you will learn how to transform basic plots into polished, insightful graphics that effectively communicate information. Through this hands-on project, you will explore different ways to style plots, adjust colors, customize axes, and apply various techniques to enhance the readability and aesthetics of your visualizations.
+
+Beyond technical proficiency, you’ll learn how to choose the right type of plot for different data situations, ensuring clarity and precision in your analysis. Not only will you gain technical proficiency, but you'll also develop the ability to create visualizations that can tell stories from data—stories that matter.
+
+Plotting Basic plots
+In this section, we will start easy by using basic plotting styles to visualize data from the provided dataset. Follow the instructions for each question and use Matplotlib functions to customize your plots with titles, labels, and legends.
+
+1
+Plot a line chart of COVID-19 New Cases in Denmark
+
+In this activity, you will create a line chart to analyze the trend of new COVID-19 cases in Denmark over time. The x-axis will represent the Date_reported, and the y-axis will display the number of new cases. The goal is to visualize how the number of cases fluctuated throughout the reported period in the dataset.
+
+Figure size : 10 by 6
+
+Title : New COVID-19 Cases in Denmark
+
+x-axis label: Date
+
+y-axis label: New Cases
+
+Line label: "New Cases"
+
+Expected outcome:
+
+Your plot should match the image below imageDescription'
+
+Correct!
+Start project before checking your activities.
+
+2
+Visualizing the Distribution of Countries Across WHO Regions
+
+In this activity, you will create a pie chart using the region_counts series to display the distribution of countries across different WHO regions from the dataset. Use the following parameters to format your chart:
+
+Figure size: 8 x 8
+
+Title: WHO Regions Distribution
+
+Percentage display (autopct): %1.1f%%
+
+Finally, apply .tight_layout() and display the plot.
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+3
+Visualizing the Distribution of Cumulative Deaths
+
+Plot a histogram to visualize the distribution of cumulative deaths using the Cumulative_deaths column. Use the following parameters to format your histogram:
+
+Figure size : 10 by 6
+
+Title: Distribution of Cumulative Deaths
+
+x-axis label: Cumulative Deaths
+
+y-axis label: Frequency
+
+Color: Red
+
+Bins : 10
+
+Apply .tight_layout() and display the plot.
+
+Expected outcome:
+
+Your plot should match the image below:
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+Applying Plotting Styles
+While the plots we created in the previous section were decent, in this section, you will learn how to transform basic plots into visualizations that truly communicates insights.
+
+4
+Customized Line Plot of New COVID-19 Cases in Denmark
+
+Redo the line plot of new COVID-19 cases in Denmark from the previous section using the series monthly_cases with the following customizations:
+
+Figure size : 10 by 6
+
+Line color: Green
+
+Line style: --
+
+Line width: 3
+
+Title: New COVID-19 Cases in Denmark (Use font size 16 and set the font weight to bold)
+
+x-axis : Date (Use font size 12)
+
+y-axis labels: New Cases (Use font size 12)
+
+x-axis rotation: Set the rotation of the x-axis labels to 45 degrees
+
+Apply .tight_layout() and display your plot.
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+5
+Customized Pie Chart of WHO Regions with EURO Slice Emphasized
+
+In this task, you will create a pie chart to visualize the distribution of WHO regions, with a special emphasis on the EURO region by exploding its slice by a fraction of 0.1. Use the region_counts series and apply the following customizations:
+
+Figure size : 8 by 8
+Percentage display (autopct): %1.1f%%
+Starting angle: 90 degrees
+Colors: Defined in the notebook
+Title formatting: Font size 16, bold font weight, and dark blue color for the title ("WHO Regions Distribution")
+Explode the EURO slice to emphasize it
+Additional settings:
+
+Add a shadow effect
+Ensure the pie chart is a perfect circle by setting the axis to equal
+Use .tight_layout() for proper formatting and display the plot
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+6
+Histogram with Custom Bin Size
+
+In this task, you will create a histogram to visualize the distribution of cumulative deaths, with customized bin size and formatting. Follow the steps below:
+
+Figure size : 12 by 7
+
+Bins: Divide the data into 15 bins
+
+Bar color: Red, with black outlines
+
+Transparency: Set alpha to 0.7 for the bars
+
+Title: "Distribution of Cumulative Deaths" (Font size: 18, Font weight: bold, Color: dark blue)
+
+x-axis label: "Cumulative Deaths" (Font size: 14, Color: purple)
+
+y-axis label: "Frequency" (Font size: 14, Color: green)
+
+Grid: Add dashed lines (--) with linewidth=0.6 and alpha=0.8
+
+Tick customization:
+
+x-axis ticks: Adjust label size to 12 and set label rotation to 45 degrees
+y-axis ticks: Set labelsize=12
+Finally, use .tight_layout() to ensure proper formatting and display the plot.
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+Plotting the wrong graphs
+7
+Create an Unfit Pie Chart Using Time Series Data
+
+In this activity, you'll use the Series daily_cases to create a pie chart, despite it being an inappropriate choice for this data type. The goal is to highlight the limitations of using a pie chart for time series data like daily COVID-19 cases. Use the following parameters to plot the chart:
+
+Figure size : 8 by 8
+
+Start angle: 90 degrees
+
+Percentage display (autopct): %1.1f%%
+
+Title: "New COVID-19 Cases Over Time"
+
+Apply .tight_layout() and display the plot.
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+8
+Visualize New COVID-19 Cases by WHO Region Using a Bar Chart
+
+Using the region_cases Series, which records the number of new COVID-19 cases in each WHO (World Health Organization) region, construct a bar chart to present this data visually.
+
+Figure size: 8 x 6
+
+Title: New COVID-19 Cases by WHO Region
+
+y-axis label: New Cases
+
+Apply .tight_layout() and display the plot.
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+9
+Generate Incorrect Scatter Plot of Cumulative Cases
+
+In this activity, you will generate a scatter plot to visualize the cumulative COVID-19 cases for countries within the EMRO region using the DataFrame case.
+
+Figure size: 10 x 6
+
+x-axis : Country, fontsize=12
+
+y-axis : Cumulative Cases, fontsize=12
+
+Color : green
+
+Title: Cumulative Cases in EMRO (Incorrect - Scatter Plot), fontsize = 16
+
+Rotate the x-axis labels by 45 degrees for better readability and use .tight_layout() to display the plot
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+Using the right plots
+10
+Why is it important to group your data or perform calculations on it before visualization?
+
+
+It allows for the use of more colors in the visualization.
+
+
+It helps to increase the complexity of the visualization.
+
+
+It ensures the visualization is based on accurate and meaningful aggregated information.
+
+
+It makes the visualization appear more professional without any analysis.
+
+Correct!
+Start project before checking your activities.
+
+11
+Why is it inappropriate to use a bar plot to represent continuous time-series data like daily new COVID-19 cases?
+
+
+Bar plots are less visually appealing compared to line plots.
+
+
+Bar plots do not allow for the use of colors.
+
+
+Bar plots imply discrete categories rather than continuous data, potentially misleading trends.
+
+
+Bar plots require more space on the page than other types of plots.
+
+Correct!
+Start project before checking your activities.
+
+12
+Why is it more effective to use a heatmap rather than a bar chart when visualizing data like daily sales across different products and regions?
+
+
+Bar charts are always easier to interpret than heatmaps.
+
+
+Bar charts require fewer data points than heatmaps.
+
+
+Heatmaps take up less space than any other type of chart.
+
+
+Heatmaps can display multiple dimensions of data simultaneously through color intensity.
+
+Correct!
+Start project before checking your activities.
+
+13
+Create a Line Plot for New Cases and New Deaths with Custom Legends
+
+In this activity, you will create a line plot to visualize both new COVID-19 cases and new deaths. You will work with the df_grouped DataFrame, which aggregates the daily new cases and deaths. . Follow the parameters outlined below:
+
+Figure Size: 10 x 6
+
+New cases
+
+Color: Blue
+Line Width: 2
+Line Label: "New Cases"
+x-axis Label: "Date Reported" (Font size: 12)
+y-axis Label: "New Cases" (Color: Blue, Font size: 12)
+x-ticks: Rotate by 45 degrees
+y-ticks: Set label color to Blue
+New Deaths
+
+Color: Red
+Line Width: 2
+Line Label: "New Deaths"
+y-axis Label: "New Deaths" (Font Color: Red, Font Size: 12)
+y-ticks: Set label color to red.
+Legend
+
+Location: Upper left
+Bounding Box Anchor: (0.1, 0.9) with bbox_transform=ax1.transAxes
+Font Size: 12
+Title - Text: "New COVID-19 Cases and Deaths Over Time (7-Day Rolling Average)" - Font Size: 16
+
+Finally, apply .tight_layout() and display the plot.
+
+Expected outcome:
+
+Your plot should match the image below
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+14
+Generate a Colormap Scatter Plot of New COVID-19 Cases
+
+In this activity, you will create a visually engaging scatter plot to represent the trend of new COVID-19 cases over time, utilizing a colormap for better insight into the data. Use the scatter function to plot Date_reported on the x-axis and New_cases on the y-axis with the following parameters:
+
+Figure size : 10 by 6
+
+cmap : viridis
+
+size : Set the size of the scatter points to 50.
+
+alpha : 0.8 for slight transparency.
+
+Colorbar Addition:
+
+Include a colorbar to provide a reference for the color mapping, labeling it as "Number of New Cases" to clarify the representation of color intensity.
+
+Title : "Scatter Plot of New COVID-19 Cases" with a font size of 16 to ensure visibility.
+
+Label the x-axis as "Date Reported" and the y-axis as "New Cases," both with a font size of 12 for clarity.
+
+Rotate the x-axis ticks by 45 degrees to improve readability of date labels, and use .tight_layout() to ensure all elements are displayed without overlap.
+
+Expected outcome:
+
+Your plot should match the image below imageDescription'
+
+Correct!
+Start project before checking your activities.

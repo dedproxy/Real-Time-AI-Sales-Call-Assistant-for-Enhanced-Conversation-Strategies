@@ -1,0 +1,80 @@
+In a far-off land, a beautiful princess had fallen gravely ill and the king and queen tried everything to cure her, but to no avail. The villagers told them about a set of magical ingredients that could cure any ailment, but they were volatile in their effects and scarce due to recent droughts. Only a skilled alchemist could determine if a specific combination of these ingredients would work. The king and queen found an alchemist who was a master of Data Science and Machine Learning, and the alchemist carefully examined the claims of the villagers to find the perfect cure for the princess.
+
+Below is a table that explains the features used to predict the target variable, which is whether the combination of ingredients and their quantities lead to a cure.
+
+Feature	Description
+Phoenix Feather	The quantity of phoenix feathers used in the cure
+Unicorn Horn	The quantity of unicorn horns used in the cure
+Dragon's Blood	The quantity of dragon's blood used in the cure
+Mermaid Tears	The quantity of mermaid tears used in the cure
+Fairy Dust	The quantity of fairy dust used in the cure
+Goblin Toes	The quantity of goblin toes used in the cure
+Witch's Brew	The quantity of witch's brew used in the cure
+Griffin Claw	The quantity of griffin claws used in the cure
+Troll Hair	The quantity of troll hair used in the cure
+Kraken Ink	The quantity of kraken ink used in the cure
+Minotaur Horn	The quantity of minotaur horns used in the cure
+Basellisk Scale	The quantity of basellisk scales used in the cure
+Chimera Fang	The quantity of chimera fangs used in the cure
+Cured	Binary variable indicating whether the combination of ingredients led to a successful cure
+Let's help them to cure the princess!!
+
+Activity
+For this lab, you will begin by examining the dataset and understanding the different variables available. You will need to import pandas and numpy for data manipulation, matplotlib and seaborn for data visualization, train_test_split from sklearn model_selection for splitting the data into training and testing sets. You can import all the libraries that you think will be required or can import it as you go along.
+
+Load the data data.csv in the notebook using the pandas library.
+
+Then answer the following questions:
+
+1
+Which variable present the highest correlation with the target?
+
+
+Troll Hair
+
+
+Mermaid Tears
+
+
+Griffin Claw
+
+
+Witch's Brew
+
+Correct!
+Start project before checking your activities.
+
+2
+Is the distribution of the target variable in your dataset balanced or imbalanced?
+
+
+Imbalanced
+
+
+Balanced
+
+Correct!
+Start project before checking your activities.
+
+3
+Did you find any missing value?
+
+
+Yes, there is 0.05% of missing values for the dataset
+
+
+Yes, there is 1% of missing values for the dataset
+
+
+Yes, there is 4.5% of missing values for the dataset
+
+
+No, data does not contain missing values
+
+Correct!
+Start project before checking your activities.
+
+Model training
+Select an appropriate algorithm for the task. You may want to try several different algorithms and compare their performance to find the best one. You may need to preprocess the data to make it suitable for machine learning algorithms. Experiment with different combinations of the magical ingredients and see how they affect the outcome. You may want to avoid overfitting and ensure that your results are reliable. Once you have found a combination of ingredients that seems to work, test it on the princess to see if it cures her.
+
+Before training the model, divide the dataset into a training set and a validation set. Use the training set to train the algorithm and the validation set to evaluate its performance.

@@ -1,0 +1,226 @@
+
+Amount and Proportion plots
+/
+U.S. Budget: Where the Money Went
+1
+Nenavath
+Basic user
+Nenavath
+Introduction
+Ever wondered how the U.S. government spent its money over the decades? This project reveals the fascinating world of federal budgets, taking us on a journey from 1962 to 2018. We’ll explore where the money went, how spending priorities shifted over time, and what it all means in today’s dollars. By adjusting for inflation, we provide a clearer picture of the real value behind the numbers, allowing us to understand how much was truly invested in each area over time. Understanding the federal budget is crucial not only for those interested in economics and politics but for anyone looking to make sense of the government's role in shaping the country’s direction. Let’s embark on this journey to visualize the evolution of U.S. spending—because understanding the past can help us navigate the future!
+
+Activities
+1
+Plot a bar chart showing the budget allocation for the top 5 departments in 1962.
+
+Create a bar chart with the created DataFrame top_5_departments to display the budget allocation for these top 5 departments using the following parameters :
+
+Figuresize : 10 by 6
+
+Colors : Defined in notebook
+
+Title : Top 5 U.S. Departments by Budget Allocation in 1962
+
+xlabel : Department
+
+ylabel : Budget (in Millions)
+
+Rotate the x-label by 45 degrees to ensure better readability, then use fig.tight_layout() to ensure everything fits perfectly.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+2
+Plot the Proportion of the Department of Defense's Budget Relative to the Total Federal Budget for Each Fiscal Year from 1962 to 2018
+
+Use the created DataFrmae combined_budget (which combines the inflation adjusted budget for the defense department and other departments) to plot a stacked bar chart using the following parameters:
+
+Figure size : 10 by 6
+
+Colors : blue and lightgray
+
+Title : Proportion of Department of Defense vs. Other Departments (1962-2018), fontsize=16
+
+xlabel : Fiscal Year, fontsize=12
+
+ylabel : Budget Dollars (Inflation Adjusted), fontsize=12
+
+Legend Title : Department, loc=upper left
+
+Finish by displaying your plot to see the budget proportions over time.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+3
+Compare the original budget values with the inflation-adjusted values to discuss the impact of inflation over time.
+
+In this exercise, you'll create a clear visualization that compares the original and inflation-adjusted budget values by fiscal year. You will be using Matplotlib's object-oriented interface to create two vertically aligned subplots sharing a common x-axis figure size of 12 by 10.
+
+Subplot 1 will display the original budget values with a bar chart in skyblue.
+
+Add a title: Original Budget Dollars by Fiscal Year
+
+Label the y-axis as: Budget Dollars
+
+Subplot 2 will showcase the inflation-adjusted budget values with a bar chart in salmon.
+
+Add a title: Inflation Adjusted Budget Dollars by Fiscal Year
+
+Label the y-axis as: Inflation Adjusted Budget Dollars
+
+Rotate the x-axis labels by 45 degrees, and label the x-axis as: Fiscal Year
+
+Finally, apply tight_layout() to ensure the layout is well-adjusted and clear.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+4
+When is it appropriate to use a pie chart over a bar plot?
+
+
+When you have one category and want to compare each one individually.
+
+
+When you want to show how different categories contribute to a whole and have a limited number of categories.
+
+
+When you want to display the sales amounts for each category.
+
+
+When you want to emphasize differences between large and small categories.
+
+Correct!
+5
+Visualize the Proportion of Each Department's Budget Relative to the Total Budget using Stacked Bar Charts
+
+Create a stacked bar chart with the created DataFrame pivot_data by iterating over the departments and stacking the bars and adjusting the bottom parameter to accumulate the heights. Use the following parameters for the plot :
+
+Figure size : 12 by 8
+
+Title : Proportion of Each Department's Budget Relative to Total Budget
+
+xlabel : Fiscal Year
+
+ylabel : Proportion of Total Budget
+
+Legend Title : Department or Unit
+
+Ensure that your x-axis labels are rotated at 45 degrees for readability. Lastly, apply the tight_layout() function to fine-tune the layout before displaying the plot.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+6
+Plot a donut chart that shows the proportions of the total federal budget allocated to the Executive, Legislative, and Judicial branches.
+
+Plot the predefined proportions in your notebook to plot a donut chart using the following parameters:
+
+Figure size : 8 by 8
+
+Colors : Defined in Notebook
+
+Title: Proportion of Total Federal Budget Allocated to Branches
+
+Use autopct to display the percentage values inside the chart with the format %1.1f%%
+
+Set the start angle to 140 degrees for proper orientation.
+
+Insert a white circle at the center with coordinates (0, 0) and a radius of 0.5 to create the donut effect. Adjust the appearance of the text labels (percentages) using the autotexts parameter, with font size = 10 and font weight = bold. Finally, use tight_layout() to ensure proper layout.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+7
+Create a Horizontal bar chart comparing the budget amounts (inflation-adjusted) for the most-funded departments.
+
+Create a horizontal bar chart with the DataFrame top_departments, setting the bars' color to green and a figure size of 10 by 6. Label the x-axis as Budget Dollars (Inflation Adjusted), the y-axis as Department or Unit, and give the chart the title Most-Funded Departments (Inflation Adjusted). Finally, apply tight_layout() to ensure the chart is neatly formatted.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+8
+Create a bar chart comparing the budgets. Evaluate the changes in the country's shifting priorities.
+
+In this exercise, you will analyze and visualize the top five funded departments based on their inflation-adjusted budgets for the years 1962 and 2018. You will use a bar chart to facilitate a direct comparison between the two years, highlighting how funding has changed over time. Using the calculated DataFrames top_2018 and top_1962, create a bar chart to compare the top five departments from both years.
+
+Figure size : 10 by 6
+
+Title : Top 5 Funded Departments (Inflation Adjusted) in 1962 vs 2018
+
+xlabel : Departments
+
+ylabel : Budget Dollars (Inflation Adjusted)
+
+bar_width : 0.35
+
+Adjust the x-ticks to display department names, rotating them by 45 degrees for better readability. Also, include a legend to distinguish between the years. Finally, Use .tight_layout() to ensure the layout is clean and free of overlaps.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+9
+Who Was the 'Big Spender' President?
+
+Using the created DataFrame sorted_presidents, create a 12 by 8 figure and axis for plotting, then generate a dark blue bar chart, setting the x-axis to the sorted president names and the y-axis to their total budgets. Label the x-axis as President, the y-axis as Total Budget Dollars (Inflation Adjusted), and give the plot a title: Which President Had the Largest Inflation-Adjusted Budget?. Adjust x-tick labels to be readable by rotating them(rotation=45, ha=right), and use .tight_layout to ensure the plot is propoerly laid out. Finally, use idxmax() and max() to find and print the name and amount of the president with the highest budget.
+
+Expected outcome:
+
+Your plot should match the image below :
+
+
+Preview
+Correct!
+10
+Plot the percentage change in inflation-adjusted budget dollars between presidential administrations for Agriculture and determine the president with the largest budget increase
+
+Using the DataFrame df_agriculture created in your notebook, plot the percentage changes over fiscal years for each president.
+
+Figure size : 12 by 6
+
+Marker : o
+
+Title : Percentage Change in Inflation-Adjusted Budget for the Department of Agriculture by President
+
+xlabel : Fiscal Year
+
+ylabel : Percentage Change in Budget Dollars (Inflation Adjusted)
+
+Legend Title : President
+
+Finally, add grid lines and display the plot using .tight_layout().
+
+Expected outcome:
+
+Your plot should match the image below: imageDescription
+
+Correct!

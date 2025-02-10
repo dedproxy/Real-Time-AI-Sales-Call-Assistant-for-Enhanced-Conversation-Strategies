@@ -1,0 +1,206 @@
+Your data science skills are needed to solve a cosmic mystery.
+
+The Spaceship Titanic was an interstellar passenger liner launched a month ago. But due to an unexpected malfunction, some of the passengers got transported to a different Galaxy!
+
+You'll need to use your Machine Learning skills to predict who got Transported and who didn't. Let's get started!
+
+Important: these activities are designed to be run in order.
+
+The Data
+Start your lab and take a look at the data we're loading from spaceship_passengers.csv. The target variable is called Transported and it indicates (True/False) if the passenger has been mistakenly transported to a different dimension or not.
+
+Syntax	Description
+PassengerId	A unique Id for each passenger
+Name	The first and last names of the passenger
+HomePlanet	The planet the passenger departed from
+CryoSleep	Indicates whether the passenger elected to be put into suspended animation for the duration of the voyage
+Destination	The planet the passenger will be debarking to
+Age	The age of the passenger
+VIP	Whether the passenger has paid for special VIP service during the voyage
+RoomService	Amount the passenger has been billed for this service
+FoodCourt	Amount the passenger has been billed for this service
+ShoppingMall	Amount the passenger has been billed for this service
+Spa	Amount the passenger has been billed for this service
+VRDeck	Amount the passenger has been billed for this service
+CabinDeck	Passenger's cabin deck
+CabinNumber	Passenger's cabin number
+CabinSide	Passenger's cabin side, can be either P for Port or S for Starboard
+Transported	Whether the passenger was transported to another dimension or not
+Data Cleaning
+1
+How many null/missing values has the column CryoSleep?
+
+217
+Correct!
+Start project before checking your activities.
+
+2
+How many null/missing values has the column FoodCourt?
+
+183
+Correct!
+Start project before checking your activities.
+
+3
+How many null/missing values has the column PassengerId?
+
+0
+Correct!
+Start project before checking your activities.
+
+4
+Fill the null/missing values in Destination with the most common value
+
+Find the most common destination in the Destination column, and fill the null values with it. Perform the fixes in place, modifying the df variable.
+
+Correct!
+Start project before checking your activities.
+
+5
+Fill the null/missing values in RoomService, FoodCourt, ShoppingMall, Spa and VRDeck with the median
+
+You must modify the df variable itself. Don't worry if you screw up with the DataFrame! just reload it with the first line of the notebook.
+
+Correct!
+Start project before checking your activities.
+
+6
+Fill the null/missing values in VIP with the most common value
+
+Find the most common value for the VIP column, and fill the null values with it. Perform the fixes in place, modifying the df variable.
+
+Correct!
+Start project before checking your activities.
+
+7
+What variables (columns) are independent and should be dropped before moving forward?
+
+There are a few variables in the dataset that are independent and won't contribute to a good prediction for our final model, which ones are them?
+
+
+ShoppingMall
+
+
+Destination
+
+
+PassengerId
+
+
+HomePlanet
+
+
+Name
+
+
+CabinDeck
+
+Correct!
+Start project before checking your activities.
+
+8
+Drop the previously defined columns
+
+Drop the columns that you have previously identified as independent. Perform your drop inplace, modifying the df variable. If you have made a mistake, restart your notebook from the beginning.
+
+Correct!
+Start project before checking your activities.
+
+9
+Drop any other row that contains a null value
+
+Drop any other row containing a null/NaN value. The final dataframe should have NO null values whatsoever.
+
+Correct!
+Start project before checking your activities.
+
+Feature Engineering
+10
+What features should be encoded?
+
+What categorical features should be encoded before training our model?
+
+
+ShoppingMall
+
+
+Destination
+
+
+CabinDeck
+
+
+HomePlanet
+
+
+CryoSleep
+
+
+RoomService
+
+
+VIP
+
+
+Age
+
+
+Spa
+
+
+CabinSide
+
+
+VRDeck
+
+
+FoodCourt
+
+Correct!
+Start project before checking your activities.
+
+11
+Encode the features previously identified in its own dataframe
+
+Given the features previously identified as categorical and that need to be encoded, encode them in a new dataframe named df_encoded. IMPORTANT. Do not modify df yet, it should be a brand new DataFrame with only the previously selected values in coded as one-hot values, tht is, 1s and 0s.
+
+Don't perform any name changes to the columns; for example, the encoded columns for CryoSleep will be CryoSleep_False and CryoSleep_True. For HomePlanet they'll be HomePlanet_Earth, HomePlanet_Europa, HomePlanet_Mars, etc.
+
+Important! You will (most likely) need to transform your the VIP column to an object/string before encoding it. Use the .astype(str) method before encoding.
+
+Correct!
+Start project before checking your activities.
+
+12
+Remove the original encoded features from df
+
+Now it's time to remove from df the original features you have previously identified as categorical and encoded. But, this time, don't remove them from df. Create a NEW variable named df_no_categorical that contains the results of the drop operation.
+
+Correct!
+Start project before checking your activities.
+
+13
+Create a new dataframe combining df_no_categorical and df_encoded
+
+Create a new DataFrame in the variable df_final that contains the combination of the two previously processed dataframes: df_no_categorical and df_encoded, in that order.
+
+The result will look something like:
+
+
+Preview
+Correct!
+Start project before checking your activities.
+
+14
+Finally, separate the target variable Transported from the training data
+
+Using df_final, which contains all our data correctly cleaned and prepared, create two new derivative variables:
+
+The transported variable should be a Series containing ONLY the Transported column.
+
+The df_train variable should be a dataframe containing ALL the columns in df_final, EXCEPT for the Transported column. This is equivalent of saying: "remove the Transported column from df_final and store it in df_train.
+
+Important: DO NOT modify df_final.
+
+Correct!
+Start project before checking your activities.

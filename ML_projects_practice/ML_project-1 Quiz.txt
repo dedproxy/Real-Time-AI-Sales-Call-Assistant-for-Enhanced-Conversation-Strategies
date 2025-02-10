@@ -1,0 +1,207 @@
+ML_project-1 Quiz:
+==========================
+
+A Lab to test your knowledge!
+
+You will be asked to complete some minor challenges to test your knowledge of Classification.
+
+Let's start with an easy question related to classification.
+
+Use the notebook if you need it to take notes, run code, or complete the exercises.
+
+Quiz
+1
+Which of the following statement is the correct one?
+
+
+Classification is a supervised machine learning problem
+
+
+In a classification problem, the target variable has only two possible outcomes.
+
+
+Classification is a unsupervised machine learning problem
+
+
+In a classification problem, the target is a continuous numerical variable.
+
+Correct!
+2
+Select which of the following scenarios are classification problems.
+
+
+Predict the prices of the Miami house
+
+
+Impact of blood alcohol content on coordination
+
+
+Predict if a Titanic passenger lives or dies due to their age, class, and gender.
+
+
+Predict if a company will spend more than 10000 USD in electricity the next semester.
+
+Correct!
+3
+At what point in the pipeline process are the parameters adjusted?
+
+
+Data cleaning
+
+
+Training
+
+
+Feature engineering
+
+
+Testing
+
+Correct!
+4
+What are some common evaluation metrics used for classification tasks?
+
+
+MAE
+
+
+RMSE
+
+
+Accuracy
+
+Correct!
+Quiz
+5
+Decision trees can be used for both classification and regression tasks.
+
+
+True
+
+
+False
+
+Correct!
+6
+In a learning problem with 2D features, what is the relationship between decision tree and 1-nearest neighbor decision boundaries?
+
+
+In both cases, the decision boundary is not linear
+
+
+There is no relationship
+
+
+In both cases, the decision boundary is piecewise linear.
+
+Correct!
+7
+What does 'naive' mean in Naive Bayes?
+
+
+The model assumes that the input features are statistically independent of one another.
+
+
+The full Bayes' Theorem is not used.
+
+Correct!
+Quiz
+8
+How does ensemble learning improve model performance?
+
+
+The models in an ensemble are trained independently, and their predictions are combined in some way to produce the final output.
+
+
+The classification models in an ensemble are trained independently, and their predictions are combined by simply taking the average of their predictions.
+
+
+Boths answers are incorrect
+
+Correct!
+9
+Given a confusion matrix for a binary classification problem, how would you compute the precision score?
+
+
+Precision = True Positives / (True Positives + True Negatives)
+
+
+Precision = False Positives / (True Positives + False Positives)
+
+
+Precision = True Positives / False Positives
+
+
+Precision = True Positives / (True Positives + False Positives)
+
+Correct!
+10
+We build a model and test it on a set of 100 customer records, and the resulting confusion matrix is as follows:
+
+Predicted Negative	Predicted Positive
+Actual Negative	70	10
+Actual Positive	5	15
+Compute the precision score to one decimal place
+
+0.6
+Correct!
+11
+We build a model and test it on a set of 100 customer records, and the resulting confusion matrix is as follows:
+
+Predicted Negative	Predicted Positive
+Actual Negative	80	5
+Actual Positive	5	20
+Compute the recall score to one decimal place
+
+
+0.8
+
+
+0.4
+
+
+Incorrect answer
+
+
+The confusion matrix is incorrect based on the main statement
+
+Correct!
+12
+As a reviewer for an international conference, you have been given papers with different experimental setups to review. Based on the content of each paper, would you recommend accepting or rejecting them?
+
+In comparison to your algorithm, mine appears to be more effective. I suggest observing the training error rates for confirmation.
+
+
+Reject
+
+
+Accept
+
+Correct!
+13
+For k cross-validation, larger k value implies more bias.
+
+
+True
+
+
+False
+
+Correct!
+14
+Let´s suppose three classifications model are built to discriminate apples from bananas. The following table shows the results obtained according to these algorithms:
+
+model	Model 1	Model 2	Model 3
+Accuracy (training)	0.99	0.93	0.99
+Accuracy (testing)	0.90	0.75	0.10
+
+Model 1 fits better a High Bias scenario
+
+
+Model 2 fits better a High Variance scenario
+
+
+Model 3 fits better a High Variance scenario
+
+
+Model 3 fits better a High Bias scenario

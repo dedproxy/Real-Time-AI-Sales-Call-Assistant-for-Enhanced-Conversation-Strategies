@@ -1,0 +1,46 @@
+
+1
+Which value has the Best hyperparameters of max_depth?
+
+
+5
+
+
+4
+
+
+21
+
+
+17
+
+Correct!
+Start project before checking your activities.
+
+2
+Use GridSearchCV to search over a range of values for max_depth (from 1 to 20) and n_estimators (from 1 to 10) hyperparameters to find the combination that yields the best performance.
+
+For this task use cv=5, and random_state=42 and compute the Best mean score
+
+
+Best hyperparameters: {'max_depth': 4, 'min_samples_leaf': 2} with a mean score of 0.70
+
+
+Best hyperparameters:{'max_depth': 4, 'min_samples_leaf': 4} with a mean score of 0.96
+
+
+Best hyperparameters: {'max_depth': 3, 'min_samples_leaf': 5} with a mean score of 0.70
+
+
+Best hyperparameters: {'max_depth': 8, 'min_samples_leaf': 12}with a mean score of 0.75
+
+Correct!  3
+True or False: For this example, the best hyperparameter obtained is max_depth = 19
+
+
+True
+
+
+False
+
+Correct!

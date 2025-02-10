@@ -1,0 +1,491 @@
+# What is LangChain?
+LangChain is an open-source orchestration framework for building applications using large language models (LLMs). Available in both Python and JavaScript-based libraries, LangChain provides a centralized development environment and set of tools to simplify the process of creating LLM-driven applications like chatbots and virtual agents.
+
+# How Does LangChain Work?
+The core idea behind LangChain is to provide a modular, flexible framework for building applications that utilize large language models (LLMs). At the heart of LangChain are a few key concepts:
+
+# LLMs
+At the core of LangChain is the ability to seamlessly integrate with a variety of large language models (LLMs) from different providers, such as OpenAI, Anthropic, and Google. LangChain provides a standardized interface to interact with these powerful AI models, abstracting away the complexities of working with each vendor’s unique APIs and input/output formats.
+
+# Chains
+LangChain’s Chains are the basic building blocks for creating complex workflows and processing pipelines. A Chain is a sequence of operations that can be performed on the outputs of an LLM. For example, you might have a Chain that first uses an LLM to extract key information from user input, then passes that to another LLM to generate a relevant response. Chaining multiple LLM-powered steps together enables developers to tackle increasingly sophisticated natural language tasks.
+
+# Agents
+Building on the Chains concept, LangChain introduces higher-level abstractions called Agents. Agents are self-contained units that can leverage Chains and other LangChain components to autonomously solve complex, goal-driven tasks. Agents encapsulate the logic for interacting with LLMs, managing state and memory, and coordinating multi-step workflows. This allows developers to create intelligent, LLM-powered “actors” that can engage in more natural, contextual conversations and complete intricate assignments.
+
+# Memory
+A crucial capability provided by LangChain is its memory management system. This allows LLMs to store and retrieve relevant information during the course of a multi-step workflow, enabling context preservation and statefulness across executions. The memory component is essential for building conversational applications and other LLM-powered experiences that require an understanding of previous interactions and intermediate results.
+
+# To install LangChain, you can use pip, the package installer for Python. Run the following command:
+
+!pip install langchain
+
+# openAI provider (LLM)
+!pip install qU langchain-openai
+
+# Next, import the required modules and set your OpenAI API key as an environment variable
+import getpass
+import os
+
+os.environ["OPENAI_API_KEY"] = getpass.getpass()
+from langchain_openai import ChatOpenAI
+model = ChatOpenAI(model="gpt-3.5-turbo")
+
+# Hello World example with LangChain
+
+from langchain_core.messages import HumanMessage, SystemMessage
+
+messages = [
+    SystemMessage(content="Translate the following from English into Italian"),
+    HumanMessage(content="hi!"),
+]
+model.invoke(messages)
+
+# To read and split a PDF document, you can use the `PyPDFLoader` class from `langchain_community.document_loaders`:
+!pip install pypdf
+from langchain_community.document_loaders import PyPDFLoader
+
+loader = PyPDFLoader("2310.06625v4.pdf")
+pages = loader.load_and_split()
+print(pages[1].page_content)
+# chunks 
+from langchain.text_splitter import CharacterTextSplitter
+# Assuming you have a list of pages loaded
+page = pages[0] # Get the first page
+# Get the text content of the first page
+page_content = page.page_content
+# Create a CharacterTextSplitter instance
+text_splitter = CharacterTextSplitter(
+chunk_size=100, # Adjust the chunk size as needed
+chunk_overlap=20, # Adjust the chunk overlap as needed
+separator="\n" # Use newline character as the separator
+)
+# Split the page content into chunks
+chunks = text_splitter.split_text(page_content)
+chunks
+
+# Vector Store and Retrieval Mechanisms
+## this code is if you have latest version of the langchain installed 
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+from langchain.document_loaders import TextLoader
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.vectorstores import Chroma
+# Load your documents (assuming 'pages' is already loaded)
+text_splitter = CharacterTextSplitter(chunk_size=1000,
+chunk_overlap=0)
+documents = text_splitter.split_documents(pages)
+# Create the embeddings
+embeddings = OpenAIEmbeddings()
+# Create the Chroma vector store
+db = Chroma.from_documents(documents, embeddings)
+
+query = "What is i transformer"
+docs = db.similarity_search(query)
+print(docs[0].page_content)
+
+## LLM Chain: Chain to run queries against LLMs
+
+from langchain_core.prompts import PromptTemplate
+from langchain_openai import OpenAI
+prompt_template = "Tell me a {adjective} joke"
+prompt = PromptTemplate(
+input_variables=["adjective"], template=prompt_template
+)
+llm = OpenAI()
+chain = prompt | llm
+result=chain.invoke("your adjective here")
+print(result)
+
+## Agents: Elevating LLM Capabilities
+In LangChain, agents are built to expand the functionality of LLMs by enabling them to interact with diverse tools and data sources. These agents can dynamically make decisions, execute actions, and retrieve information.
+
+Agent
+There are several types of agents, including ZeroShotAgent and ConversationalAgent. Each type is suited for different tasks:
+
+ ZeroShotAgent: Performs tasks without needing prior context or training.
+ ConversationalAgent: Maintains context across interactions, suitable for dialog-based applications
+
+Next, let’s define some tools to use. Let’s write a really simple Python function to calculate the length of a word that is passed in.
+
+## Loading the model first
+from langchain_openai import ChatOpenAI
+llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+from langchain.agents import tool
+@tool
+def get_word_length(word: str) -> int:
+"""Returns the length of a word."""
+return len(word)
+get_word_length.invoke("abc")
+#output = 3
+tools = [get_word_length]
+
+##Create Prompt Using Agents
+
+from langchain_core.prompts import ChatPromptTemplate,
+MessagesPlaceholder
+prompt = ChatPromptTemplate.from_messages(
+[
+(
+"system",
+"You are very powerful assistant, but don't know current
+events",
+),
+("user", "{input}"),
+MessagesPlaceholder(variable_name="agent_scratchpad"),
+]
+)
+
+## Bind Tools to LLM:
+
+llm_with_tools = llm.bind_tools(tools)
+
+## creating the Agent 
+
+from langchain.agents.format_scratchpad.openai_tools import (
+format_to_openai_tool_messages,
+)
+from langchain.agents.output_parsers.openai_tools import
+OpenAIToolsAgentOutputParser
+agent = (
+{
+"input": lambda x: x["input"],
+"agent_scratchpad": lambda x: format_to_openai_tool_messages(
+x["intermediate_steps"]
+),
+}
+| prompt
+| llm_with_tools
+| OpenAIToolsAgentOutputParser()
+)
+from langchain.agents import AgentExecutor
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+list(agent_executor.stream({"input": "How many letters in the word
+eudca"}))
+
+## Adding Memory
+
+from langchain_core.prompts import MessagesPlaceholder
+
+MEMORY_KEY = "chat_history"
+
+prompt = ChatPromptTemplate.from_messages([
+    (
+        "system",
+        "You are very powerful assistant, but bad at calculating lengths of words.",
+    ),
+    MessagesPlaceholder(variable_name=MEMORY_KEY),
+    ("user", "{input}"),
+    MessagesPlaceholder(variable_name="agent_scratchpad"),
+])
+
+from langchain_core.messages import AIMessage, HumanMessage
+
+chat_history = []
+
+agent = (
+    {
+        "input": lambda x: x["input"],
+        "agent_scratchpad": lambda x: format_to_openai_tool_messages(x["intermediate_steps"]),
+        "chat_history": lambda x: x["chat_history"],
+    }
+    | prompt
+    | llm_with_tools
+    | OpenAIToolsAgentOutputParser()
+)
+
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+input1 = "how many letters in the word educa?"
+
+result = agent_executor.invoke({"input": input1, "chat_history": chat_history})
+chat_history.extend([HumanMessage(content=input1), AIMessage(content=result["output"])])
+
+agent_executor.invoke({"input": "is that a real word?", "chat_history": chat_history})
+
+## Memory Management in Langchain:
+
+Types of Memory
+LangChain supports different types of memory to suit various needs:
+
+Conversational Memory: Keeps track of the entire conversation history, enabling the agent to refer to previous user inputs and responses.
+Buffer Memory: Maintains a limited number of recent interactions, balancing context retention and memory efficiency.
+Entity Memory: This technique focuses on tracking specific entities mentioned during the conversation, which is useful for tasks that require detailed information about particular items or concepts.
+
+## ConversationBufferMemory Example and Implementation
+from langchain_openai import ChatOpenAI
+from langchain.memory import ConversationBufferMemory
+from langchain_core.prompts import ChatPromptTemplate,MessagesPlaceholder
+from langchain_core.runnables import RunnableLambda,RunnablePassthrough
+
+model=ChatOpenAI(model_name='gpt-3.5-turbo', temperature=0.0)
+
+prompt= ChatPromptTemplate.from_messages(
+        [
+            ("system", "Act as a helpful Al Assistant"), 
+            MessagesPlaceholder(variable_name="history"), 
+            ("human", "(input)"),
+        ]
+)
+memory=ConversationBufferMemory(return_messages=True)
+
+from operator import itemgetter
+
+chain=( 
+        RunnablePassthrough.assign
+        (
+            history=RunnableLambda(memory.load_memory_variables)
+            |
+            itemgetter("history")
+        )
+        |
+        prompt
+        |
+        model
+        )
+#use the conversation chain
+user_input={'input':'what are the first four colors of a rainbow'}
+response=chain.invoke(user_input)
+#saving the context
+memory.save_context(user_input,{'output':response.content})
+print('First Response: ',response.content)
+
+user_input={'input':'And the last 3 ?'}
+response=chain.invoke(user_input)
+#also using memory present in the chain 
+memory.save_context(user_input,{'output':response.content})
+print('Second Response: ',response.content)
+
+
+user_input = {'input': 'Which color is in the center of a rainbowz
+response = chain.invoke(user_input)
+memory.save_context(user_input, {'output': response.content})
+print('Third Response: ', response.content)
+## Frequently Asked Questions
+Q1. What is LangChain used for?
+A. LangChain is used to build applications powered by language models, enabling them to interact with data sources, perform actions, and execute complex workflows.
+Q2. Why is LangChain so popular?
+A. LangChain is popular for its ability to extend the functionality of language models, offering tools to build versatile, dynamic applications.
+3. How can I get started with LangChain?
+A. Install LangChain via pip, set up an LLM provider like OpenAI, and interact with the model using simple code snippets provided in the LangChain documentation
+Q4. What types of memory does LangChain support, and why is memory important?
+A. LangChain supports Conversational Memory, Buffer Memory, and Entity Memory, which are crucial for maintaining context and coherence in multistep workflows.
+5. What are some practical applications of LangChain?
+A. LangChain is used in customer support, healthcare, education, and content creation to develop intelligent, context-aware applications and improve user interactions.
+Q6. Is LangChain a Python library?
+A. Yes, LangChain is a Python library designed to simplify the development of applications utilizing language models.
+Q7. Does LangChain use ChatGPT?
+A. LangChain can integrate with ChatGPT and other large language models to enhance application functionality and decision-making capabilities.
+
+## core components of Langchain
+import langchain
+import openai
+from langchain.llms import OpenAI
+from langchain.prompts import PromptTemplate
+## Intitialize LLM and prompt template:
+from getpass import getpass
+OPENAI_API_KEY = getpass()
+
+llm = OpenAI(temperature=0.9,
+          openai_api_key=OPENAI_API_KEY
+       )
+prompt = PromptTemplate(
+    input_variables=["product"],
+    template="What is a good name for a company that makes {product}?",
+)
+
+## creating a chain
+from langchain.chains import LLMChain
+chain = LLMChain(llm=llm, prompt=prompt, verbose=True)
+
+print(chain.run("gaming laptop"))
+
+## Crafting Chains – Simple Sequential Chains
+
+from langchain.llms import OpenAI
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains import SimpleSequentialChain
+
+# This is an LLMChain to write first chain.
+
+llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY)
+first_prompt = ChatPromptTemplate.from_template(
+    "What is the best name to describe a company that makes {product}?"
+)
+chain_one = LLMChain(llm=llm, prompt=first_prompt)
+
+# This is an LLMChain to write second chain.
+
+llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY)
+second_prompt = ChatPromptTemplate.from_template(
+    "Write a 20 words description for the following company:{company_name}"
+)
+chain_two = LLMChain(llm=llm, prompt=second_prompt)
+
+## chainign two chains 
+
+overall_simple_chain = SimpleSequentialChain(chains=[chain_one, chain_two],
+                                             verbose=True
+                                            )
+overall_simple_chain.run("gaming laptop")
+
+## Crafting Chains – Sequential Chains
+
+from langchain.llms import OpenAI
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+from langchain.prompts import ChatPromptTemplate
+from langchain.chains import SequentialChain
+
+llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY)
+
+
+## Initializing and chaining
+
+Review = "Les ordinateurs portables GamersTech impressionne par ses
+ performances exceptionnelles et son design élégant. De sa configuration 
+ matérielle robuste à un clavier RVB personnalisable et un système de 
+ refroidissement efficace, il établit un équilibre parfait entre prouesses 
+ de jeu et portabilité."
+
+# prompt template 1: translate to English
+
+first_prompt = ChatPromptTemplate.from_template(
+    "Translate the following review to english:"
+    "\n\n{Review}"
+)
+
+# chain 1: input= Review and output= English_Review
+
+chain_one = LLMChain(llm=llm, prompt=first_prompt,
+                     output_key="English_Review"                     
+                    )
+                   
+                    
+# prompt template 2: Summarize the English review
+
+second_prompt = ChatPromptTemplate.from_template(
+    "Can you summarize the following review in 1 sentence:"
+    "\n\n{English_Review}"
+)
+
+# chain 2: input= English_Review and output= summary
+
+chain_two = LLMChain(llm=llm, prompt=second_prompt,
+                     output_key="summary"
+                    )
+# prompt template 3: translate to English
+
+third_prompt = ChatPromptTemplate.from_template(
+    "What language is the following review:\n\n{Review}"
+)
+
+# chain 3: input= Review and output= language
+
+chain_three = LLMChain(llm=llm, prompt=third_prompt,
+                       output_key="language"
+                      )
+# prompt template 4: follow up message
+
+fourth_prompt = ChatPromptTemplate.from_template(
+    "Write a follow up response to the following "
+    "summary in the specified language:"
+    "\n\nSummary: {summary}\n\nLanguage: {language}"
+)
+
+# chain 4: input= summary, language and output= followup_message
+
+chain_four = LLMChain(llm=llm, prompt=fourth_prompt,
+                      output_key="followup_message"
+                     )
+Chaining Two Chains
+An overall Sequential Chain named ‘overall_chain’ is created, incorporating four individual chains ‘chain_one’, ‘chain_two’, ‘chain_three’, and ‘chain_four’. The input variable “Review” is processed through these chains, generating three distinct output variables: “English_Review,” “summary,” and “followup_message.” The ‘overall_chain’ executes the input review through the specified chains and produces these outputs, facilitating a structured, sequential processing flow with detailed outputs.
+
+overall_chain = SequentialChain(
+    chains=[chain_one, chain_two, chain_three, chain_four],
+    input_variables=["Review"],
+    output_variables=["English_Review", "summary","followup_message"],
+    verbose=True
+)
+overall_chain(Review)
+
+## crafting chain- Router chain:
+
+from langchain.chains.router import MultiPromptChain
+from langchain.chains.router.llm_router import LLMRouterChain,RouterOutputParser
+from langchain.prompts import PromptTemplate
+
+llm = OpenAI(temperature=0.7, openai_api_key=OPENAI_API_KEY) 
+
+
+## Definign promt templates:
+
+physics_template = """You are a very smart physics professor. \
+You are great at answering questions about physics in a concise\
+and easy to understand manner. \
+When you don't know the answer to a question you admit\
+that you don't know.
+
+Here is a question:
+{input}"""
+
+
+math_template = """You are a very good mathematician. \
+You are great at answering math questions. \
+You are so good because you are able to break down \
+hard problems into their component parts,
+answer the component parts, and then put them together\
+to answer the broader question.
+
+Here is a question:
+{input}"""
+
+history_template = """You are a very good historian. \
+You have an excellent knowledge of and understanding of people,\
+events and contexts from a range of historical periods. \
+You have the ability to think, reflect, debate, discuss and \
+evaluate the past. You have a respect for historical evidence\
+and the ability to make use of it to support your explanations \
+and judgements.
+
+Here is a question:
+{input}"""
+
+
+## creating a default chain 
+
+default_prompt = ChatPromptTemplate.from_template("{input}")
+default_chain = LLMChain(llm=llm, prompt=default_prompt)
+
+# creating Router template:
+
+router_template = MULTI_PROMPT_ROUTER_TEMPLATE.format(
+    destinations=destinations_str
+)
+router_prompt = PromptTemplate(
+    template=router_template,
+    input_variables=["input"],
+    output_parser=RouterOutputParser(),
+)
+
+router_chain = LLMRouterChain.from_llm(llm, router_prompt)
+
+
+## chaining everything together:
+chain = MultiPromptChain(router_chain=router_chain,
+                         destination_chains=destination_chains,
+                         default_chain=default_chain, verbose=True
+                        )
+## FAQ's
+Q1: What is LangChain and how does it revolutionize language processing?
+A1: LangChain is a sophisticated technology that leverages Large Language Models (LLMs) to streamline language processing tasks. It integrates various components such as LLMChains and Router Chains, allowing seamless task routing and efficient processing, leading to the development of intelligent applications.
+Q2: How does LLMChain work, and what role does it play in LangChain?
+A2: LLMChain is a fundamental element of LangChain. It operates by employing a PromptTemplate to format user inputs, passing them to an LLM for processing. The optional OutputParser refines the output, ensuring it aligns with the desired format, making LLMChain an essential tool for coherent language generation.
+Q3: What are Sequential Chains, and how do they enhance the processing of multiple inputs and outputs?
+A3: Sequential Chains combine various subchains, allowing the output of one to serve as the input for the next. Simple Sequential Chains handle single inputs and outputs, while more complex Sequential Chains manage multiple inputs and outputs simultaneously, streamlining the flow of information in LangChain applications.
+Q4: What is the purpose of Router Chains in LangChain, and how do they optimize complex tasks?
+A4: Router Chains are pivotal for intricate tasks with multiple specialized subchains. They determine which subchain to route inputs based on specific characteristics. The Router Chain, along with Destination Chains and a Default Chain, efficiently directs inputs to the most suitable subchain, ensuring precise processing.

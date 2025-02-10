@@ -1,0 +1,236 @@
+A Lab to test your knowledge!
+
+You will be asked to complete some minor challenges to test your knowledge of Classification.
+
+Let's start with an easy question related to classification.
+
+Use the notebook if you need it to take notes, run code, or complete the exercises.
+
+Quiz
+1
+Which of the following statement is the correct one?
+
+
+Classification is a unsupervised machine learning problem
+
+
+Classification is a supervised machine learning problem
+
+
+In a classification problem, the target is a continuous numerical variable.
+
+
+In a classification problem, the target variable has only two possible outcomes.
+
+Correct!
+Start project before checking your activities.
+
+2
+Select which of the following scenarios are classification problems.
+
+
+Predict if a company will spend more than 10000 USD in electricity the next semester.
+
+
+Predict if a Titanic passenger lives or dies due to their age, class, and gender.
+
+
+Predict the prices of the Miami house
+
+
+Impact of blood alcohol content on coordination
+
+Correct!
+Start project before checking your activities.
+
+3
+At what point in the pipeline process are the parameters adjusted?
+
+
+Feature engineering
+
+
+Training
+
+
+Testing
+
+
+Data cleaning
+
+Correct!
+Start project before checking your activities.
+
+4
+What are some common evaluation metrics used for classification tasks?
+
+
+RMSE
+
+
+Accuracy
+
+
+MAE
+
+Correct!
+Start project before checking your activities.
+
+Quiz
+5
+Decision trees can be used for both classification and regression tasks.
+
+
+True
+
+
+False
+
+Correct!
+Start project before checking your activities.
+
+6
+In a learning problem with 2D features, what is the relationship between decision tree and 1-nearest neighbor decision boundaries?
+
+
+In both cases, the decision boundary is piecewise linear.
+
+
+There is no relationship
+
+
+In both cases, the decision boundary is not linear
+
+Correct!
+Start project before checking your activities.
+
+7
+What does 'naive' mean in Naive Bayes?
+
+
+The model assumes that the input features are statistically independent of one another.
+
+
+The full Bayes' Theorem is not used.
+
+Correct!
+Start project before checking your activities.
+
+Quiz
+8
+How does ensemble learning improve model performance?
+
+
+The models in an ensemble are trained independently, and their predictions are combined in some way to produce the final output.
+
+
+The classification models in an ensemble are trained independently, and their predictions are combined by simply taking the average of their predictions.
+
+
+Boths answers are incorrect
+
+Correct!
+Start project before checking your activities.
+
+9
+Given a confusion matrix for a binary classification problem, how would you compute the precision score?
+
+
+Precision = False Positives / (True Positives + False Positives)
+
+
+Precision = True Positives / False Positives
+
+
+Precision = True Positives / (True Positives + False Positives)
+
+
+Precision = True Positives / (True Positives + True Negatives)
+
+Correct!
+Start project before checking your activities.
+
+10
+We build a model and test it on a set of 100 customer records, and the resulting confusion matrix is as follows:
+
+Predicted Negative	Predicted Positive
+Actual Negative	70	10
+Actual Positive	5	15
+Compute the precision score to one decimal place
+
+0.6
+Correct!
+Start project before checking your activities.
+
+11
+We build a model and test it on a set of 100 customer records, and the resulting confusion matrix is as follows:
+
+Predicted Negative	Predicted Positive
+Actual Negative	80	5
+Actual Positive	5	20
+Compute the recall score to one decimal place
+
+
+0.8
+
+
+The confusion matrix is incorrect based on the main statement
+
+
+0.4
+
+
+Incorrect answer
+
+Correct!
+Start project before checking your activities.
+
+12
+As a reviewer for an international conference, you have been given papers with different experimental setups to review. Based on the content of each paper, would you recommend accepting or rejecting them?
+
+In comparison to your algorithm, mine appears to be more effective. I suggest observing the training error rates for confirmation.
+
+
+Accept
+
+
+Reject
+
+Correct!
+Start project before checking your activities.
+
+13
+For k cross-validation, larger k value implies more bias.
+
+
+True
+
+
+False
+
+Correct!
+Start project before checking your activities.
+
+14
+Let´s suppose three classifications model are built to discriminate apples from bananas. The following table shows the results obtained according to these algorithms:
+
+model	Model 1	Model 2	Model 3
+Accuracy (training)	0.99	0.93	0.99
+Accuracy (testing)	0.90	0.75	0.10
+
+Model 2 fits better a High Variance scenario
+
+
+Model 3 fits better a High Variance scenario
+
+
+Model 3 fits better a High Bias scenario
+
+
+Model 1 fits better a High Bias scenario
+
+Correct!
+Start project before checking your activities.
+
+Conclusion
+Congratulations, you have completed the questionnaire. Please review the questions you answered incorrectly so that you can continue to improve your knowledge.

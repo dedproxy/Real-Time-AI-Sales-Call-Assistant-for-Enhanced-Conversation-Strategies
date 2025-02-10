@@ -1,0 +1,70 @@
+
+Activities
+Let's import the dataset auto-mpg.csv and explote it. Check the structure of the data by inspecting the number of rows, columns, and attributes of the dataset. You can use functions like .shape, .head(), .info(), and .describe() to get a quick overview of the data.
+
+Using the dataset provided answer the following questions:
+
+1
+Compute the correlation matrix
+
+Based on the correlation analysis of the dataset, which variable has the highest correlation with the target column?
+
+Clean the data before computing correlation matrix.
+
+
+displacement
+
+
+model year
+
+
+weight
+
+
+acceleration
+
+Correct!
+Start project before checking your activities.
+
+Let's plot the relation between "mpg", "cylinders", "displacement" and "weight" using a pairplot as:
+
+Let's run the code in the notebook.
+
+sns.pairplot(df[["mpg", "cylinders", "displacement", "weight"]], diag_kind="kde")
+
+Preview
+2
+Use train_test_split to split the data into training and testing sets. Split the dataset in 80% training, 20% testing, and random_state=0.
+
+Set the random_state parameter to a desired integer value for reproducibility. Store this variable in random_state and then used in the function.
+
+Store the values in the variables in X_train,X_test,y_train and y_test.
+
+Correct!
+Start project before checking your activities.
+
+Let's estimate the regression line between *mpg *and the three variable with the highest correlation coefficient ("cylinders", "displacement", "weight"). To implement linear regression in Python, you will need to import the following module:
+
+from sklearn.linear_model import LinearRegression
+3
+Linear Regression
+
+Create an instance of the LinearRegression and store the model in lr.
+
+Correct!
+Start project before checking your activities.
+
+4
+Train the linear regression model
+
+It's time to train the linear regression model using the training dataset.
+
+Correct!
+Start project before checking your activities.
+
+5
+Make predictions on the test set
+
+Use the trained model to make predictions on the test data. Store the prediction in y_pred.
+
+Correct!

@@ -1,0 +1,92 @@
+Dataset
+Let's import the dataset Calls_for_Service_2015.csv and explote it. Check the structure of the data by inspecting the number of rows, columns, and attributes of the dataset. You can use functions like .shape, .head(), .info(), and .describe() to get a quick overview of the data.
+
+It is important to check for duplicates in a specific column of a DataFrame to ensure data integrity and accuracy in your analysis. Duplicates can introduce biases and distort the representation of the underlying data.
+
+1
+Check if any of the record of the dataset is duplicated
+
+
+There are not duplicated rows
+
+
+There are 29 duplicated rows
+
+
+There are 5 duplicated rows
+
+
+There are 9 duplicated rows
+
+Correct!
+Start project before checking your activities.
+
+Checking for duplicates in a specific column is an essential step in data preprocessing and analysis. It ensures data accuracy, reliability, and consistency, which are fundamental for drawing meaningful conclusions and making informed decisions based on the data.
+
+2
+Your task is to check for duplicates in a specific column of a given DataFrame. Select the correct code
+
+
+df.duplicated('TypeText')
+
+
+df.duplicates('TypeText')
+
+
+df.duplicated('TypeText',axis=1)
+
+Correct!
+Start project before checking your activities.
+
+Having a feature like ID with duplicated values can lead to errors and inconsistencies in the dataset, as it becomes challenging to accurately identify and associate data with its corresponding records, compromising data integrity and potentially resulting in erroneous analysis outcomes.
+
+3
+Drop duplicated
+
+Your task is to drop duplicate rows from a given DataFrame and retain the first occurrence of each duplicated row. Select the correct code.
+
+
+df.dropduplicates( keep='last',inplace=True)
+
+
+df.drop_duplicated('first')
+
+
+df.drop_duplicates( keep='first',inplace=True)
+
+
+df.dropna()
+
+Correct!
+Start project before checking your activities.
+
+Quiz
+4
+Scenario question
+
+You work as a data analyst for an e-commerce company that sells a wide range of products. The company has provided you with a dataset of customer reviews, which includes attributes such as the product purchased, review text, rating, and demographic information of customers. Your task is to leverage this data to enhance the product recommendation system.
+
+Scenario: You have conducted an initial analysis of the customer review dataset. During this analysis, you identified that there are several duplicate entries in the dataset, which can lead to biased results and flawed conclusions. What should be your next step to address this issue?
+
+
+Leave the duplicates as is and conduct a separate analysis on them to explore potential patterns.
+
+
+Implement data preprocessing techniques to identify and remove duplicate entries effectively.
+
+
+Merge the duplicate entries into single records to increase the dataset's size for more accurate recommendations.
+
+Correct!
+Start project before checking your activities.
+
+5
+True or False: Ignoring duplicate entries in a dataset is a recommended practice, as they don't significantly impact the accuracy of data analysis and decision-making.
+
+
+True
+
+
+False.
+
+Correct!

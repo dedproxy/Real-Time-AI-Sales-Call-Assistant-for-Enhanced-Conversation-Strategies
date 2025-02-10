@@ -1,0 +1,266 @@
+
+1
+Accuracy
+
+A spam recognition classifier is described by the following confusion matrix:
+
+TP, TN, FP, FN = 4, 91, 1, 4
+
+Compute the accuracy and insert the answer in the box below.
+
+Round to two significant decimals
+
+0.95
+Correct!
+Start project before checking your activities.
+
+2
+Accuracy
+
+A spam recogition classifier is described by the following confusion matrix:
+
+TP, TN, FP, FN = 0, 95, 5, 0
+
+Compute the accuracy and insert the answer in the box below.
+
+Round to two significant decimals
+
+0.95
+Correct!
+Start project before checking your activities.
+
+Precision: Precision is the ratio of correctly predicted positive instances to the total number of instances predicted as positive. It is a measure of the classifier's ability to correctly identify positive instances and avoid false positives.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+3
+Precision
+
+Compute the precision based on the following results:
+
+TP = 114 FP = 14
+
+Round to two significant decimals
+
+0.89
+Correct!
+Start project before checking your activities.
+
+Recall (or Sensitivity): Recall is the ratio of correctly predicted positive instances to the total number of actual positive instances. It is a measure of the classifier's ability to detect all positive instances.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+4
+Recall
+
+Compute the recall based on the following results:
+
+TP = 114 FN = 0
+
+Round to nearest integer.
+
+If your answer is 0, write 0.00; and if it's 1, write 1.00.
+
+1.00
+Correct!
+Start project before checking your activities.
+
+F1 Score: The F1 Score is the harmonic mean of precision and recall. It balances precision and recall and gives an overall performance score for the classifier.
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+These are some of the most commonly used evaluation metrics for classification. The appropriate evaluation metric depends on the problem and the requirements of the specific use case.
+
+5
+F1-SCORE
+
+Compute the F1- score based on the following results:
+
+TP, FP, FN = 2.00, 1.00, 90.00
+
+Round to two significant decimals
+
+0.04
+Correct!
+Start project before checking your activities.
+
+Why is this Useful?
+It is crucial to use multiple evaluation metrics to evaluate a model, as a model may perform well using one metric but poorly using another. This highlights the importance of using multiple evaluation metrics to gain a comprehensive understanding of a model's performance. Using multiple evaluation metrics helps ensure that the model is operating correctly and optimally.
+
+Evaluation Classification Metrics using scikit-learn
+In this section, let's evaluate an example of how you could calculate some evaluation metrics using scikit-learn library in Python:
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score,confusion_matrix
+
+y_true = [1, 0, 1, 1, 0, 1]
+y_pred = [1, 0, 1, 0, 0, 1]
+
+conf_matrix = confusion_matrix(y_true, y_pred)
+acc = accuracy_score(y_true, y_pred)
+prec = precision_score(y_true, y_pred)
+rec = recall_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred)
+
+print(conf_matrix)
+print("Accuracy: ", acc)
+print("Precision: ", prec)
+print("Recall: ", rec)
+print("F1-score: ", f1)
+
+Preview
+In this example, y_true represents the true labels and y_pred represents the predicted labels.
+
+6
+Evaluation Metrics for Classification
+
+Let's now evaluate another example of how you could calculate some evaluation metrics.
+
+# True labels of the data
+y_true = [0, 1, 0, 1, 1, 0, 1, 1, 0, 0]
+
+# Predicted labels of the data
+y_pred = [0, 1, 0, 1, 0, 1, 1, 0, 1, 0]
+Store the result in the variables f1,accuracy,precision and recall.
+
+Correct!
+Start project before checking your activities.
+
+Evaluation Metrics for Classification
+Let's build and evaluate logistic regression and decision tree models in the notebook using scikit-learn library.
+
+7
+Fit a logistic regression model using the given input and output patterns X and Y, respectively. Once fitted, determine the precision of this fitted logistic regression model using the test dataset.
+
+X_train = [[4,2,1],[3,4,6],[5,6,7],[8,9,7]]
+y_train = [1,2,1,2]
+X_test = [[4,3,1],[2,4,3],[5,6,1],[5,9,9]]
+y_test = [1,2,2,2]
+Use random_state=0 in the model and average='weighted'to calculate the precision. round to two decimal places the result.
+
+0.83
+Correct!
+Start project before checking your activities.
+
+8
+Fit a Decision Tree model using the input patterns X and the corresponding output patterns Y. After fitting, evaluate the recall of the fitted Decision Tree model using the test dataset.
+
+X_train = [[4,2,1],[3,4,6],[5,6,7],[8,9,7]]
+y_train = [1,2,1,2]
+X_test = [[4,3,1],[2,4,3],[5,6,1],[5,9,9]]
+y_test = [1,2,2,2]
+Use random_state=0 in the model and average='weighted'to calculate the recall. round to two decimal places the result.
+
+0.75
+Correct!
+Start project before checking your activities.
+
+9
+Fit a Decision Tree and a Logistic Regression model using the input patterns X and the corresponding output patterns Y. After fitting, compare the performance of both models in terms of F1-score and determine which one presents the best results.
+
+from sklearn.datasets import make_blobs
+
+X_train, y_train = make_blobs(n_samples=100, centers=2,
+                  random_state=0, cluster_std=2.3)
+
+X_test, y_test = make_blobs(n_samples=10, centers=2,
+                  random_state=0, cluster_std=4.5)
+Use random_state=0 in the model and average='weighted'to calculate the F1-score. round to two decimal places the result.
+
+
+Boths models presents similar values of f1-score
+
+
+Logistic Regression
+
+
+Decision tree
+
+Correct!
+Start project before checking your activities.
+
+Precision and Recall
+Precision and recall are two extremely important model evaluation metrics. While precision refers to the percentage of your results which are relevant, recall refers to the percentage of total relevant results correctly classified by your algorithm. Unfortunately, it is not possible to maximize both these metrics at the same time, as one comes at the cost of another.
+
+In most problems, you could either give a higher priority to maximizing precision, or recall, depending upon the problem you are trying to solve. But in general, there is a simpler metric which takes into account both precision and recall, and therefore, you can aim to maximize this number to make your model better. This metric is the F1-score, which is simply the harmonic mean of precision and recall.
+
+What is the tradeoff between precision and recall?
+If you increase precision, it will reduce recall and vice versa. This is called the precision/recall tradeoff. Classifier performs differently for different threshold values means positive and negative predication can be changed by setting the threshold value. We will return to this concept in another lab.
+
+Real example
+We are trying to detect fradulent claims. This makes the "positive case" (the thing we are trying to detect) the fraudulent claims. Giving our definitions in terms of fraud vs not-fraud (instead of positive and negative) gives us the following:
+
+Precision is the fraction of cases that are fraudulent out of those that our classifier labelled as positive. The problem with a low precision is that our investigators will spend a lot of time investigating claims that are actually legitimate.
+
+Recall is the fraction of fraudulent cases our classifier finds. The problem with a low recall is that we would be paying out on a lot of undetected fraudulent claims.
+
+In this example, paying a claim you didn't have to is more expensive than paying someone to investigate the claim, so recall would be more important.
+
+To help get some experience with this, try answering the following questions by rephrasing the meaning of precision and recall in the context of each problem.
+
+10
+Precision and Recall
+
+Let’s say we have a machine that classifies if a fruit is an apple or not.
+
+
+Precision will measure the amount of misclassified oranges as apples (False Positives) and the amount of apples not correctly classified as apples (False Negatives).
+
+
+Precision measures how many of our classified oranges were actually oranges.
+
+
+Recall measures how many apples we might have missed in the entire sample of fruit.
+
+
+Recall measures how many of our classified oranges were actually apples.
+
+Correct!
+Start project before checking your activities.
+
+Conclusion
+This lab presents an introduction to evalutation metrics for classification. Evaluation metrics for classification play a crucial role in measuring the performance of a classification model. They provide a numerical score that reflects how well the model is able to distinguish between different classes. Some of the most commonly used metrics for classification include accuracy, precision, recall, F1-score and confusion matrix. It is important to choose the right metric based on the specific requirements of the problem, as each metric has its own strengths and weaknesses (we will cover this in other lab). For example, accuracy might be appropriate when the classes are balanced, but precision and recall might be more relevant in imbalanced datasets. Additionally, the choice of evaluation metric can significantly impact the model selection and optimization process.
